@@ -1,0 +1,84 @@
+<div id="main-content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-lg-6 col-md-8 col-sm-12">
+          <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="fa fa-arrow-left"></i></a> Leave Request</h2>
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="/dashboard"><i class="icon-home"></i></a></li>
+            <li class="breadcrumb-item">Employee</li>
+            <li class="breadcrumb-item active">Leave Request</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="row clearfix">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="header">
+            <h2>Leave Requests List</h2>
+
+          </div>
+          <div class="body">
+            <div class="table-responsive">
+              <table class="table table-hover js-basic-example dataTable table-custom m-b-0 c_list">
+                <thead class="thead-dark">
+                <tr>
+                  <th>#</th>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Employee ID</th>
+                  <th>Leave Type</th>
+                  <th>Date</th>
+                  <th>Reason</th>
+                  <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let lq of leaveReqs; let i=index">
+                  <th scope="row">{{i+1}}</th>
+                  <td class="width45">
+                    <img src="http://localhost:3000/emp-all/getAvatar?img={{lq.avatar}}" class="rounded-circle avatar" alt="">
+                  </td>
+                  <td>
+                    <h6 class="mb-0">{{lq.name}}</h6>
+                  </td>
+                  <td><span>{{lq.empid}}</span></td>
+                  <td><span>{{lq.leavetype}}</span></td>
+                  <td>from {{lq.fromdate}} to {{lq.todate}}</td>
+                  <td>{{lq.reason}}</td>
+                  <td>
+                    <button type="button" class="btn btn-sm btn-success" title="Approved"><i class="fa fa-check"></i></button>
+                    &nbsp;
+                    <button type="button" class="btn btn-sm btn-outline-danger js-sweetalert" title="Declined" data-type="confirm"><i class="fa fa-ban"></i></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="width45">
+                    <img src="../assets/images/xs/avatar2.jpg" class="rounded-circle avatar" alt="">
+                  </td>
+                  <td>
+                    <h6 class="mb-0">Maryam Amiri</h6>
+                  </td>
+                  <td><span>LA-0215</span></td>
+                  <td><span>Casual Leave</span></td>
+                  <td>21 July, 2018 to 26 July, 2018</td>
+                  <td>Attend Birthday party</td>
+                  <td>
+                    <button type="button" class="btn btn-sm btn-success" title="Approved"><i class="fa fa-check"></i></button>
+                    <button type="button" class="btn btn-sm btn-outline-danger js-sweetalert" title="Declined" data-type="confirm"><i class="fa fa-ban"></i></button>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Default Size -->
+

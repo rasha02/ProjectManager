@@ -1,0 +1,190 @@
+<div id="main-content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-lg-6 col-md-8 col-sm-12">
+          <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="fa fa-arrow-left"></i></a> Employee List</h2>
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="/dashboard"><i class="icon-home"></i></a></li>
+            <li class="breadcrumb-item">Employee</li>
+            <li class="breadcrumb-item active">Employee List</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="row clearfix">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="header">
+            <h2>Employee List</h2>
+           <div class="header-dropdown">
+              <button style=" margin-left: 1000px"  data-toggle="modal" data-target="#myModalAdd" class="btn btn-info" data-dismiss="modal">Add New</button>
+            </div>
+
+          </div>
+
+          <div class="body">
+            <div class="table-responsive">
+              <table class="table table-hover js-basic-example dataTable table-custom table-striped m-b-0 c_list">
+                <thead class="thead-dark">
+                <tr>
+                  <th>#</th>
+                  <th>
+                    <label class="fancy-checkbox">
+                      <input class="select-all" type="checkbox" name="checkbox">
+                      <span></span>
+                    </label>
+                  </th>
+                  <th>Name</th>
+                  <th>Employee ID</th>
+                  <th>Phone</th>
+                  <th>Join Date</th>
+                  <th>Role</th>
+                  <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let emp of employees; let i=index">
+                  <th scope="row">{{i+1}}</th>
+                  <td class="width45">
+                    <label class="fancy-checkbox">
+                      <input class="checkbox-tick" type="checkbox" name="checkbox">
+                      <span></span>
+                    </label>
+                    <img src="http://localhost:3000/employee/getAvatar?img={{emp.avatar}}"  class="rounded-circle avatar" alt="">
+                  </td>
+                  <td>
+                    <h6 class="mb-0">{{emp.name}}</h6>
+                    <span>{{emp.email}}</span>
+                  </td>
+                  <td><span>{{emp.empid}}</span></td>
+                  <td><span>{{emp.phone}}</span></td>
+                  <td>{{emp.joindate}}</td>
+                  <td>{{emp.role}}</td>
+                  <td>
+                    <button type="button" class="btn btn-sm btn-outline-secondary" title="Edit" data-toggle="modal" data-target="#myModalEdit" (click)="editEmployee(emp._id,emp.name,emp.email,emp.phone,emp.empid,emp.joindate, emp.role)"><i class="icon-pencil"></i></button>&nbsp;
+                    <button type="button" class="btn btn-sm btn-outline-danger js-sweetalert" title="Delete" data-type="confirm"><i class="icon-trash"></i></button>
+                  </td>
+                </tr>
+              </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="myModalEdit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog" >
+            <div class="modal-content">
+              <div class="modal-header">
+                <h6 class="modal-title mt-0">Edit Employee</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              </div>
+              <div class="modal-body">
+                <div class="row clearfix">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Name" [(ngModel)]="name">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Email ID *" [(ngModel)]="email">
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <div class="form-group">
+                      <input type="number" class="form-control" placeholder="Phone Number" [(ngModel)]="phone">
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Employee ID *" [(ngModel)]="empid">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Join Date" [(ngModel)]="joindate">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Role" [(ngModel)]="role">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateEmployee()">Update</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+       <div id="myModalAdd"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+          <div class="modal-dialog" >
+            <div class="modal-content">
+              <div class="modal-header">
+                <h6 class="modal-title mt-0">Add Employee</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              </div>
+              <div class="modal-body">
+                <div class="row clearfix">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Name" [(ngModel)]="name">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Email ID *" [(ngModel)]="email">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Password" [(ngModel)]="password">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Confirm Password">
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-group">
+                      <input type="number" class="form-control" placeholder="Phone Number" [(ngModel)]="phone">
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Employee ID *" [(ngModel)]="empid">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input type="date" class="form-control" placeholder="Join Date" [(ngModel)]="joindate">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Role" [(ngModel)]="role">
+                    </div>
+                  </div>
+               </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addEmployee()">Add</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+

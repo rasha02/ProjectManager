@@ -1,0 +1,76 @@
+@charset "UTF-8";
+
+/* STYLE pour décrire la zone de sélection d'une date dans un calendrier */
+.calendrier {
+	background-image: url(../images/iconecalendrier.jpg);
+	background-repeat: no-repeat;
+	height: 22px;
+	width: 130px;
+	font-size:11px;
+        cursor:text;
+        margin-left:5px;
+
+        -moz-border-radius : 7px 7px 7px 7px;
+        -webkit-border-radius : 7px 7px 7px 7px;
+        border-radius : 7px 7px 7px 7px;
+}
+
+#ds_calclass {
+	margin:0px;
+	padding:0px;
+}
+
+#ds_calclassdebut {
+	margin:0px;
+	padding:0px;
+}
+
+#ds_calclassfin {
+	margin:0px;
+	padding:0px;
+}
+
+.ds_box {
+	background-color: #FFF;
+	border: 1px solid #000;
+	position: absolute;
+	z-index: 1;
+}
+
+.ds_tbl {
+	background-color: #FFF;
+}
+
+.ds_head {
+	background-color: #000000;
+	color: #FFF;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.ds_subhead {
+	background-color: #CCC;
+	color: #000;
+	font-size: 11px;
+	font-weight: bold;
+	text-align: center;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	width: 32px;
+	padding-left:0px;
+}
+
+.ds_cell {
+	background-color: #EEE;
+	color: #000;
+	font-size: 11px;
+	text-align: center;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	padding: 5px;
+	cursor: pointer;
+}
+.ds_cell:hover {
+	background-color: #F3F3F3;
+} /* Ce style "hover" ne fonctionne sous IE */
+/* FIN du style de définition du calendrier */

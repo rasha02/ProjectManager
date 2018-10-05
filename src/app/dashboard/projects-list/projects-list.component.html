@@ -1,0 +1,107 @@
+<div id="main-content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-lg-6 col-md-8 col-sm-12">
+          <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="fa fa-arrow-left"></i></a> Projects List</h2>
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="/dashboard"><i class="icon-home"></i></a></li>
+            <li class="breadcrumb-item">Projects</li>
+            <li class="breadcrumb-item active">Projects List</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="row clearfix">
+      <div class="col-lg-12 col-md-12">
+        <div class="card">
+          <div class="body project_report">
+            <div class="table-responsive">
+              <table class="table table-hover js-basic-example dataTable table-custom m-b-0">
+                <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Project</th>
+                  <th>Deadline</th>
+                  <th>Prograss</th>
+                  <th>Lead</th>
+                  <th>Team</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let proj of projects; let i=index">
+                  <th scope="row">{{i+1}}</th>
+                  <td class="project-title">
+                    <h6>{{proj.name}}</h6>
+                    <small>Created {{proj.startdate}}</small>
+                  </td>
+                  <td>{{proj.enddate}}</td>
+                  <td>
+                    <div class="progress progress-xs">
+                      <div class="progress-bar" role="progressbar" aria-valuenow="48" aria-valuemin="0" aria-valuemax="100" style="width: 48%;"></div>
+                    </div>
+                    <small>Completion with: 48%</small>
+                  </td>
+                  <td><img src="../assets/images/xs/avatar1.jpg" data-toggle="tooltip" data-placement="top" title="Team Lead" alt="Avatar" class="width35 rounded"></td>
+                  <td>
+                    <ul class="list-unstyled team-info" *ngFor="let emp of emps; let i=index">
+                      <li>{{i+1}}</li>
+                      <li><img src="http://localhost:3000/emp-all/getAvatar?img={{emp.avatar}}" data-toggle="tooltip" data-placement="top" title="Avatar" alt="{{emp.name}}"></li>
+                    </ul>
+                  </td>
+                  <td><span class="badge badge-success">Active</span></td>
+                  <td class="project-actions">
+                    <a routerLink="/dashboard/project-detail/:idproj" class="btn btn-sm btn-outline-primary"><i class="icon-eye"></i></a>&nbsp;
+                    <a class="btn btn-sm btn-outline-success" title="Edit" data-toggle="modal" data-target="#myModalEdit" (click)="editProject(proj._id,proj.name,proj.startdate,proj.enddate)"><i class="icon-pencil"></i></a>&nbsp;
+                    <a href="javascript:void(0);" class="btn btn-sm btn-outline-danger js-sweetalert" title="Delete" data-type="confirm"><i class="icon-trash"></i></a>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div id="myModalEdit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog" >
+            <div class="modal-content">
+              <div class="modal-header">
+                <h6 class="modal-title mt-0">Update Project</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              </div>
+              <div class="modal-body">
+                <div class="row clearfix">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Name" [(ngModel)]="name">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input type="date" class="form-control" placeholder="Email ID *" [(ngModel)]="startdate">
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <div class="form-group">
+                      <input type="date" class="form-control" placeholder="Phone Number" [(ngModel)]="enddate">
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateProject()">Update</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+      </div>
+    </div>
+
+  </div>
+</div>

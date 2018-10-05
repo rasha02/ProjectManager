@@ -1,0 +1,57 @@
+@charset "UTF-8";
+
+/* STYLE pour décrire la zone de sélection d'une date dans un calendrier */
+.horaire {
+    height: 22px;
+    width: 70px;
+    font-size:11px;
+    cursor:text;
+    margin-left:5px;
+
+    -moz-border-radius : 7px 7px 7px 7px;
+    -webkit-border-radius : 7px 7px 7px 7px;
+    border-radius : 7px 7px 7px 7px;
+}
+
+.hor_box {
+    background-color: #FFF;
+    border: 1px solid #000;
+    position: absolute;
+    width:100px;
+    height:150px;
+    max-height:150px;
+    overflow-y:scroll;
+    z-index: 1;
+    margin:0px;
+    padding:0px
+}
+
+.hor_tbl {
+    background-color: #FFF;
+    width:100%;
+}
+
+
+.hor_head {
+    background-color: #000000;
+    color: #FFF;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.hor_cell {
+	background-color: #FFFFFF;
+	color: #000;
+	font-size: 11px;
+	text-align: center;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	padding: 5px;
+	cursor: pointer;
+}
+.hor_cell:hover {
+	background-color: #F3F3F3;
+}
+/* Ce style "hover" ne fonctionne sous IE */
+/* FIN du style de définition du calendrier */

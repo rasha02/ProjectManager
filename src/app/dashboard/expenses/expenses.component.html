@@ -1,0 +1,542 @@
+<link rel="stylesheet" href="../../../assets/css/bd/imanager.min.css">
+
+<!-- MAIN CSS -->
+<link rel="stylesheet" href="../../../assets/css/main.css">
+<link rel="stylesheet" href="../../../assets/css/color_skins.css">
+
+<!--<script type="text/javascript">
+  var liste_typeh = {'1':'Normale','2':'Congés (CP, RTT)','5':'Maladie','8':'Logiclever','9':'Formation','3':'Congés non décomptés','4':'Congés maternité','10':'Astreinte (recup en salaire)','7':'Astreinte (recup en congés)'};
+  var wforms = new Wish_Forms('fr');
+  function changeLigneProjet(ligne, idseltypeh) {
+    wforms.remove_liste(idseltypeh);
+    switch(ligne.value) {
+      case '-1':				wforms.add_option(idseltypeh, 'Congés (CP, RTT)', '2');				wforms.add_option(idseltypeh, 'Maladie', '5');				wforms.add_option(idseltypeh, 'Congés non décomptés', '3');				wforms.add_option(idseltypeh, 'Congés maternité', '4');				break;
+      case '-2':				wforms.add_option(idseltypeh, 'Logiclever', '8');				wforms.add_option(idseltypeh, 'Formation', '9');				break;
+      default:				wforms.add_option(idseltypeh, 'Normale', '1');				wforms.add_option(idseltypeh, 'Astreinte (recup en salaire)', '10');				wforms.add_option(idseltypeh, 'Astreinte (recup en congés)', '7');				break;
+    }
+    if(!window.ActiveXObject) document.getElementById(idseltypeh).focus();
+  }
+  function checkAvailableNormale(selPrj, idligne) {
+    switch(selPrj.value) {
+      default:
+        document.getElementById(idligne+'_0').className = 'bg_alterne_weekend';
+        document.getElementById(idligne+'_1').className = 'bg_alterne_weekend';
+        document.getElementById(idligne+'_2').className = 'bg_alterne_ouvre';
+        document.getElementById(idligne+'_3').className = 'bg_alterne_ouvre';
+        document.getElementById(idligne+'_4').className = 'bg_alterne_ouvre';
+        document.getElementById(idligne+'_5').className = 'bg_alterne_ouvre';
+        document.getElementById(idligne+'_6').className = 'bg_alterne_ouvre';
+        document.getElementById(idligne+'_7').className = 'bg_alterne_weekend';
+        document.getElementById(idligne+'_8').className = 'bg_alterne_weekend';
+        document.getElementById(idligne+'_9').className = 'bg_alterne_ouvre';
+        document.getElementById(idligne+'_10').className = 'bg_alterne_ouvre';
+        document.getElementById(idligne+'_11').className = 'bg_alterne_ouvre';
+        document.getElementById(idligne+'_12').className = 'bg_alterne_ouvre';
+        document.getElementById(idligne+'_13').className = 'bg_alterne_ouvre';
+        document.getElementById(idligne+'_14').className = 'bg_alterne_weekend';
+        document.getElementById(idligne+'_15').className = 'bg_alterne_weekend';
+        document.getElementById(idligne+'_16').className = 'bg_alterne_ouvre';
+        document.getElementById(idligne+'_17').className = 'bg_alterne_ouvre';
+        document.getElementById(idligne+'_18').className = 'bg_alterne_ouvre';
+        document.getElementById(idligne+'_19').className = 'bg_alterne_ouvre';
+        document.getElementById(idligne+'_20').className = 'bg_alterne_ouvre';
+        document.getElementById(idligne+'_21').className = 'bg_alterne_weekend';
+        document.getElementById(idligne+'_22').className = 'bg_alterne_weekend';
+        document.getElementById(idligne+'_23').className = 'bg_alterne_ouvre';
+        document.getElementById(idligne+'_24').className = 'bg_alterne_ouvre';
+        document.getElementById(idligne+'_25').className = 'bg_alterne_ouvre';
+        document.getElementById(idligne+'_26').className = 'bg_alterne_ouvre';
+        document.getElementById(idligne+'_27').className = 'bg_alterne_ouvre';
+        document.getElementById(idligne+'_28').className = 'bg_alterne_weekend';
+        document.getElementById(idligne+'_29').className = 'bg_alterne_weekend';
+        break;
+    }
+  }
+
+</script>-->
+
+
+
+<div id="main-content">
+  <div class="container-fluid">
+    <div class="block-header">
+
+      <div class="row">
+        <div class="col-lg-6 col-md-8 col-sm-12">
+          <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i
+            class="fa fa-arrow-left"></i></a>Expenses</h2>
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="/dashboard"><i class="icon-home"></i></a></li>
+            <li class="breadcrumb-item">Expenses</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row clearfix">
+      <div class="col-lg-12 col-md-12">
+        <div class="card">
+          <div class="header">
+            <h2>New Expenses</h2><br>
+
+          </div>
+          <div class="body">
+            <div class="table-responsive">
+
+            <div class="row clearfix">
+              <div class="maincontent">
+
+                <div class="big_bloc">
+                  <!--<h3 class="header_bloc">Fiche temps - SABRI Youssef</h3>-->
+                  <div class="contenu_bloc">
+
+                    <table width="100%">
+                      <tbody><tr>
+                        <td width="150px"></td>
+                        <td width="90px;"></td>
+                        <td width="90px;"></td>
+                        <td>&nbsp;</td>
+                        <td width="90px"><a class="bnavigation bnavlittletxt" href="" style="">View Times</a></td>
+                        <td width="90px"></td>
+                        <td width="90px"></td>
+                        <td width="35px">&nbsp;</td>
+                        <td width="95px"><input class="bactionico bsave"  type="submit" value="Save"></td>
+                        <td width="75px"><a class="bnavigation breturn"  href="javascript:history.go(-1)">Return</a></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                    <br>
+                    <table width="100%">
+                      <tbody><tr class="bg_alterne_soft_full">
+                        <td width="100px"><strong>Ressource&nbsp;:</strong></td>
+                        <td width="150px" align="left"><a class="lien" href="">{{this.user.name}}</a></td>
+                        <td width="100px"><strong>Période&nbsp;:</strong></td>
+                        <td width="150px" align="left"> Octobre 2018</td>
+                        <td width="100px"><strong>Agence :</strong></td>
+                        <td width="150px" align="left">AGENCE</td>
+                        <td width="100px"><strong>Devise :</strong></td>
+                        <td width="100px" align="left">EUR Euro</td>
+                        <td width="150px"><strong>KM scale :</strong></td>
+                        <td width="170px" align="left">
+                          <input type="text" class="hiddeninput" name="ligne_idtemps[]" value="0">
+                          <select class="shortsmallselection"    style="max-width:none;min-width:100%;width:100%" name="valeur">
+                            <option >KCV < 5000km - 0.54€/km</option>
+                            <option >KCV < 5000km - 0.54€/km</option>
+
+                          </select><br>
+                          </td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                    <br>
+                    <table width="100%">
+                      <tbody id="">
+                      <tr><th class="bg_h4" colspan="33">Actual expenses</th></tr>
+                      <tr>
+                        <table class="actual-expenses table table-condensed table-bordered table-hover">
+                          <thead>
+                          <tr>
+                            <th scope="col" width="110px"  class="text-primary">
+                              Attach. No.
+                            </th>
+                            <th width="110px" scope="col" class="text-primary">
+                              Day
+                            </th>
+                            <th width="300px" scope="col" class="text-primary">
+                              Project/Expense type
+                            </th>
+                            <th width="350px" scope="col" class="text-primary">
+                              Description
+                            </th>
+                            <th width="150px" scope="col" class="text-primary">
+                              Currency/Exch. rate
+                            </th>
+                            <th width="200px" scope="col" class="text-primary">
+                              Amount IT or Nb Km
+                            </th>
+                            <th width="100px" scope="col" class="text-primary">
+                              Rebill client
+                            </th>
+                            <th width="25px" scope="col">&nbsp;</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr>
+                            <td width="70px" class="attachment-no">
+                              <div class="attachmentId bm-numeric-input ember-view">
+                                <input class="form-control" name="actualexp-0-number" type="text">
+                              </div>
+                            </td >
+                            <td width="70px" class="day day-weekend prj-in">
+                              <div id="ember924" class="bm-field-date ember-view"><div class="input-group ">
+                                <span class="input-group-addon">
+                                  <i class="bmi-calendar highlight" aria-hidden="true"></i>
+                                </span>
+                                <input name="actualexp-0-startDate" class="form-control bm-field-date__input" value="" type="text">
+                              </div>
+
+                              </div>
+                            </td>
+                            <td width="230px" class="prj-exptype">
+                              <input type="text" class="hiddeninput" name="ligne_idtemps[]" value="0">
+                              <select class="normalsmallselection"    style="max-width:none;min-width:100%;width:100%" name="valeur">
+                                <option >Absence</option>
+                                <option >Interne</option>
+                                <option> PROJ</option>
+                              </select><br>
+                              <select class="shortsmallselection"  align="middle" style="max-width:none;min-width:70%;width:70%" name="type">
+                                <option></option>
+                                <option>Repas</option>
+                                <option>Hotel</option>
+                                <option>Transport</option>
+                              </select>&nbsp;
+
+                            </td>
+                            <td width="250px" class="exptitle">
+                              <input id="ember937" style="touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;" name="actualexp-0-title" class="form-control ember-text-field ember-view" type="text">
+                            </td>
+                            <td  width="200px" class="currency-exchrate">
+                              <input type="text" class="hiddeninput" name="ligne_idtemps[]" value="0">
+                              <select class="normalsmallselection"    style="max-width:none;min-width:100%;width:100%" name="valeur">
+                                <option >EUR Euro</option>
+                                <option >USD</option>
+                                <option>GBP</option>
+                              </select><br>
+                            </td>
+                            <td width="200px" class="amount-nbkm">
+                              <div class="amounts">
+                                <div class="amount ">
+                                  <div class="input-group input-group-sm pull-right">
+                                    <div id="ember946" class="bm-numeric-input ember-view"><input class="form-control" name="actualexp-0-originalAmountIT" type="text">
+                                    </div>
+                                    <span class="input-group-addon">€ <abbr title="Including Taxes">IT</abbr></span>
+                                  </div>
+
+                                  <!---->
+                                </div>
+                                <div class="action">
+                                  <button id="ember947" style="touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;" title="Enter VAT amount manually" class="btn-xs btn-outline bm-edit bm-btn btn btn-icon-only ember-view" type="button" aria-label="
+												             		Enter VAT amount manually"><i class="bmi-edit" aria-hidden="true"></i>
+                                    <span class="btn-content">	Enter VAT amount manually</span>
+                                  </button>
+                                </div>
+                              </div>
+                            </td>
+                            <td width="100px" class="rebill">
+                              <label align="middle" class="checkbox-label">
+                                <input id="ember948" style="touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;" name="actualexp-0-reinvoiced" class="ember-checkbox ember-view" type="checkbox">
+                                <span class="bm-checkbox-style"></span>
+                              </label>
+                            </td>
+                            <td width="25px" colspan="32"><a><img src="../../../assets/images/supp.png" alt="Delete" title="Delete"></a>
+                            </td>
+                          </tr>
+                          </tbody>
+
+                        </table>
+                      </tr>
+                      <tr class="bg_alterne_soft_full">
+                        <td colspan="32">&nbsp;</td>
+                        <td width="25px"><a href=""><img src="../../../assets/images/add.png" alt="Add" title="Add"></a></td>
+                      </tr>
+
+                      </tbody>
+                    </table>
+                    <p style="clear:both">&nbsp;</p>
+                    <p style="clear:both">&nbsp;</p>
+                    <table width="100%">
+                      <tbody id="tpsnormaux_body">
+                      <tr><th class="bg_h4" colspan="33">Fixed expenses</th></tr>
+                      <tr>
+                        <th class="text-primary" style="min-width:180px;" scope="col">Projet/Type d'activité</th>
+                        <th width="30px" class="text-primary">1</th>
+                        <th width="30px" class="text-primary">2</th>
+                        <th width="30px" class="text-primary">3</th>
+                        <th width="30px" class="text-primary">4</th>
+                        <th width="30px" class="text-primary">5</th>
+                        <th width="30px" class="text-primary">6</th>
+                        <th width="30px" class="text-primary">7</th>
+                        <th width="30px" class="text-primary">8</th>
+                        <th width="30px" class="text-primary">9</th>
+                        <th width="30px" class="text-primary">10</th>
+                        <th width="30px" class="text-primary">11</th>
+                        <th width="30px" class="text-primary">12</th>
+                        <th width="30px" class="text-primary">13</th>
+                        <th width="30px" class="text-primary">14</th>
+                        <th width="30px" class="text-primary">15</th>
+                        <th width="30px" class="text-primary">16</th>
+                        <th width="30px" class="text-primary">17</th>
+                        <th width="30px" class="text-primary">18</th>
+                        <th width="30px" class="text-primary">19</th>
+                        <th width="30px" class="text-primary">20</th>
+                        <th width="30px" class="text-primary">21</th>
+                        <th width="30px" class="text-primary">22</th>
+                        <th width="30px" class="text-primary">23</th>
+                        <th width="30px" class="text-primary">24</th>
+                        <th width="30px" class="text-primary">25</th>
+                        <th width="30px" class="text-primary">26</th>
+                        <th width="30px" class="text-primary">27</th>
+                        <th width="30px" class="text-primary">28</th>
+                        <th width="30px" class="text-primary">29</th>
+                        <th width="30px" class="text-primary">30</th>
+                        <th width="30px" class="text-primary">31</th>
+                        <th width="25px" scope="col">&nbsp;</th>
+                      </tr>
+                      <tr class="bg_alterne_soft_full" id="tpsnormaux_ligne_1">
+                        <td>
+                          <input type="text" class="hiddeninput" name="ligne_idtemps[]" value="0">
+                          <select class="normalsmallselection" style="max-width:none;min-width:100%;width:100%" name="ligne_prj[]" id="ligne_prj_1" onchange="changeLigneProjet(this, 'ligne_typeh_1');checkAvailableNormale(this,'tpsnormaux_ligne_1');">
+                            <option value="-1">Absence</option>
+                            <option value="-2">Interne</option>
+                            <option value="50 141">YSA - Control-M AIT - MIS141 - DALKIA France</option>
+                          </select><br>
+                          <select class="shortsmallselection"   style="max-width:none;min-width:70%;width:70%" name="type">
+                            <option></option>
+                            <option>Repas</option>
+                            <option>Hotel</option>
+                            <option>Transport</option>
+                          </select>&nbsp;
+                          <input id="ligne_allchk_1" type="checkbox" onclick="checkAllActivity(this.checked,1,'tpsnormaux_ligne_1')" title="Remplir/Vider tous les jours ouvrés">
+                        </td>
+
+                        <td class="bg_alterne_ouvre" id="tpsnormaux_ligne_1_0">
+                          <input name="ligne_txt_0[]" id="ligne_txt_1_0" type="text" class="veryveryshortinput" value="" maxlength="5">
+                        </td>
+                        <td class="bg_alterne_ouvre" id="tpsnormaux_ligne_1_1">
+                          <input name="ligne_txt_1[]" id="ligne_txt_1_1" type="text" class="veryveryshortinput" value="" maxlength="5">
+                        </td>
+                        <td class="bg_alterne_holliday" id="tpsnormaux_ligne_1_2">
+                          <input name="ligne_txt_2[]" id="ligne_txt_1_2" type="text" class="veryveryshortinput" value="" maxlength="5">
+                        </td>
+                        <td class="bg_alterne_ouvre" id="tpsnormaux_ligne_1_3">
+                          <input name="ligne_txt_3[]" id="ligne_txt_1_3" type="text" class="veryveryshortinput" value="" maxlength="5">
+                        </td>
+                        <td class="bg_alterne_ouvre" id="tpsnormaux_ligne_1_4">
+                          <input name="ligne_txt_4[]" id="ligne_txt_1_4" type="text" class="veryveryshortinput" value="" maxlength="5">
+                        </td>
+                        <td class="bg_alterne_weekend" id="tpsnormaux_ligne_1_5">
+                          <input name="ligne_txt_5[]" id="ligne_txt_1_5" type="text" class="veryveryshortinput" value="" maxlength="5">
+                        </td>
+                        <td class="bg_alterne_weekend" id="tpsnormaux_ligne_1_6">
+                          <input name="ligne_txt_6[]" id="ligne_txt_1_6" type="text" class="veryveryshortinput" value="" maxlength="5">
+                        </td>
+                        <td class="bg_alterne_ouvre" id="tpsnormaux_ligne_1_7">
+                          <input name="ligne_txt_7[]" id="ligne_txt_1_7" type="text" class="veryveryshortinput" value="" maxlength="5">
+                        </td>
+                        <td class="bg_alterne_ouvre" id="tpsnormaux_ligne_1_8">
+                          <input name="ligne_txt_8[]" id="ligne_txt_1_8" type="text" class="veryveryshortinput" value="" maxlength="5">
+                        </td>
+                        <td class="bg_alterne_ouvre" id="tpsnormaux_ligne_1_9">
+                          <input name="ligne_txt_9[]" id="ligne_txt_1_9" type="text" class="veryveryshortinput" value="" maxlength="5">
+                        </td>
+                        <td class="bg_alterne_ouvre" id="tpsnormaux_ligne_1_10">
+                          <input name="ligne_txt_10[]" id="ligne_txt_1_10" type="text" class="veryveryshortinput" value="" maxlength="5">
+                        </td>
+                        <td class="bg_alterne_ouvre" id="tpsnormaux_ligne_1_11">
+                          <input name="ligne_txt_11[]" id="ligne_txt_1_11" type="text" class="veryveryshortinput" value="" maxlength="5">
+                        </td>
+                        <td class="bg_alterne_weekend" id="tpsnormaux_ligne_1_12">
+                          <input name="ligne_txt_12[]" id="ligne_txt_1_12" type="text" class="veryveryshortinput" value="" maxlength="5">
+                        </td>
+                        <td class="bg_alterne_weekend" id="tpsnormaux_ligne_1_13">
+                          <input name="ligne_txt_13[]" id="ligne_txt_1_13" type="text" class="veryveryshortinput" value="" maxlength="5">
+                        </td>
+                        <td class="bg_alterne_ouvre" id="tpsnormaux_ligne_1_14">
+                          <input name="ligne_txt_14[]" id="ligne_txt_1_14" type="text" class="veryveryshortinput" value="" maxlength="5">
+                        </td>
+                        <td class="bg_alterne_ouvre" id="tpsnormaux_ligne_1_15">
+                          <input name="ligne_txt_15[]" id="ligne_txt_1_15" type="text" class="veryveryshortinput" value="" maxlength="5">
+                        </td>
+                        <td class="bg_alterne_ouvre" id="tpsnormaux_ligne_1_16">
+                          <input name="ligne_txt_16[]" id="ligne_txt_1_16" type="text" class="veryveryshortinput" value="" maxlength="5">
+                        </td>
+                        <td class="bg_alterne_ouvre" id="tpsnormaux_ligne_1_17">
+                          <input name="ligne_txt_17[]" id="ligne_txt_1_17" type="text" class="veryveryshortinput" value="" maxlength="5">
+                        </td>
+                        <td class="bg_alterne_ouvre" id="tpsnormaux_ligne_1_18">
+                          <input name="ligne_txt_18[]" id="ligne_txt_1_18" type="text" class="veryveryshortinput" value="" maxlength="5">
+                        </td>
+                        <td class="bg_alterne_weekend" id="tpsnormaux_ligne_1_19">
+                          <input name="ligne_txt_19[]" id="ligne_txt_1_19" type="text" class="veryveryshortinput" value="" maxlength="5">
+                        </td>
+                        <td class="bg_alterne_weekend" id="tpsnormaux_ligne_1_20">
+                          <input name="ligne_txt_20[]" id="ligne_txt_1_20" type="text" class="veryveryshortinput" value="" maxlength="5">
+                        </td>
+                        <td class="bg_alterne_ouvre" id="tpsnormaux_ligne_1_21">
+                          <input name="ligne_txt_21[]" id="ligne_txt_1_21" type="text" class="veryveryshortinput" value="" maxlength="5">
+                        </td>
+                        <td class="bg_alterne_ouvre" id="tpsnormaux_ligne_1_22">
+                          <input name="ligne_txt_22[]" id="ligne_txt_1_22" type="text" class="veryveryshortinput" value="" maxlength="5">
+                        </td>
+                        <td class="bg_alterne_ouvre" id="tpsnormaux_ligne_1_23">
+                          <input name="ligne_txt_23[]" id="ligne_txt_1_23" type="text" class="veryveryshortinput" value="" maxlength="5">
+                        </td>
+                        <td class="bg_alterne_ouvre" id="tpsnormaux_ligne_1_24">
+                          <input name="ligne_txt_24[]" id="ligne_txt_1_24" type="text" class="veryveryshortinput" value="" maxlength="5">
+                        </td>
+                        <td class="bg_alterne_ouvre" id="tpsnormaux_ligne_1_25">
+                          <input name="ligne_txt_25[]" id="ligne_txt_1_25" type="text" class="veryveryshortinput" value="" maxlength="5">
+                        </td>
+                        <td class="bg_alterne_weekend" id="tpsnormaux_ligne_1_26">
+                          <input name="ligne_txt_26[]" id="ligne_txt_1_26" type="text" class="veryveryshortinput" value="" maxlength="5">
+                        </td>
+                        <td class="bg_alterne_weekend" id="tpsnormaux_ligne_1_27">
+                          <input name="ligne_txt_27[]" id="ligne_txt_1_27" type="text" class="veryveryshortinput" value="" maxlength="5">
+                        </td>
+                        <td class="bg_alterne_ouvre" id="tpsnormaux_ligne_1_28">
+                          <input name="ligne_txt_28[]" id="ligne_txt_1_28" type="text" class="veryveryshortinput" value="" maxlength="5">
+                        </td>
+                        <td class="bg_alterne_ouvre" id="tpsnormaux_ligne_1_29">
+                          <input name="ligne_txt_29[]" id="ligne_txt_1_29" type="text" class="veryveryshortinput" value="" maxlength="5">
+                        </td>
+                        <td class="bg_alterne_ouvre" id="tpsnormaux_ligne_1_30">
+                          <input name="ligne_txt_30[]" id="ligne_txt_1_30" type="text" class="veryveryshortinput" value="" maxlength="5">
+                        </td>
+                        <td width="25px"><a href=""><img src="../../../assets/images/supp.png" alt="Delete" title="Delete"></a>
+                        </td>
+                      </tr>
+
+                      <tr class="bg_alterne_soft_full">
+                        <td colspan="32">&nbsp;</td>
+                        <td width="25px"><a href=""><img src="../../../assets/images/add.png" alt="Add" title="Add"></a></td>
+                      </tr>
+
+                      </tbody>
+                    </table>
+                    <span class="legende">Nb de jours ouvrés : 23</span><br>
+                    <br>
+
+                    <table>
+                      <tr><td width="30px">&nbsp;</td><small>Légende</small></tr>
+                      <tr>
+                        <td width="15px">&nbsp;</td>
+                        <td><img src="../../../assets/images/icone_en_cours.png" alt="" width="20" height="20" />Production</td>
+                        <td width="15px">&nbsp;</td>
+                        <td><img src="../../../assets/images/icone_w8_4_answer.png" alt="" width="20" height="20" />Internal</td>
+                        <td width="15px">&nbsp;</td>
+                        <td><img src="../../../assets/images/icone_w8_ok.png" alt="" width="20" height="20" />Absence</td>
+                      </tr>
+                    </table>
+
+                    <table width="100%">
+                      <tbody><tr><th class="bg_h4" colspan="14">Totals</th></tr>
+                      </tbody>
+                    </table>
+                    <br>
+                    <table width="60%" style="float:left" class="table table-bordered ">
+                      <tbody>
+                      <tr>
+                        <td class="bg_alterne_soft_start" width="200px"><strong>Expense Type</strong></td>
+                        <td  class="bg_alterne_hard" width="150px"><strong>Amount IT</strong></td>
+                        <td class="bg_alterne_hard" width="150px"><strong>of witch VAT</strong></td>
+                        <td class="bg_alterne_soft_end" width="150px"><strong>Amout ET</strong></td>
+                      </tr>
+                      <tr>
+                        <td class="bg_alterne_soft_start" width="200px">Repas<br><span class="legende">YSA - Control-M AIT - DALKIA France</span></td>
+                        <td class="bg_alterne_hard" width="150px">€0.00</td>
+                        <td class="bg_alterne_hard" width="15px">€0.00</td>
+                        <td class="bg_alterne_soft_end" width="150px">€0.00</td>
+                        <td>&nbsp;</td>
+                      </tr>
+
+                      </tbody>
+                    </table>
+                    <p style="clear:both">&nbsp;</p>
+                    <table width="100%" style="float:left" class="table table-bordered ">
+                      <tbody>
+                      <tr>
+                        <td class="bg_alterne_soft_start"><strong></strong></td>
+                        <td class="bg_alterne_soft_start"><strong>Kilometers traveled</strong></td>
+                        <td class="bg_alterne_hard"><strong>Travel Exp.</strong></td>
+                        <td class="bg_alterne_hard"><strong>Actual Expenses</strong></td>
+                        <td class="bg_alterne_hard"><strong>Fixed Expenses</strong></td>
+                        <td class="bg_alterne_hard"><strong>Of which VAT</strong></td>
+                        <td class="bg_alterne_hard"><strong>Expenses</strong></td>
+                        <td class="bg_alterne_hard"><strong>Advance to be return</strong></td>
+                        <td class="bg_alterne_soft_end"><strong>To pay</strong></td>
+                        <td class="bg_alterne_soft_end"><strong>Paid</strong></td>
+                      </tr>
+                      <tr>
+                        <td class="bg_alterne_soft_start"><strong>Amount</strong><br></td>
+                        <td class="bg_alterne_soft_start"><strong>0.00 km</strong><br></td>
+                        <td class="bg_alterne_hard">€0.00</td>
+                        <td class="bg_alterne_hard">€0.00</td>
+                        <td class="bg_alterne_hard">€0.00</td>
+                        <td class="bg_alterne_hard">€0.00</td>
+                        <td class="bg_alterne_hard text-primary">€0.00</td>
+                        <td class="bg_alterne_soft_end" width="170px">
+                          <div id="ember810" class="agency-advance-input bm-field-money ember-view"><div class="input-group input-group-sm ">
+                            <!---->
+                            <!---->
+                            <div id="ember811" class="bm-numeric-input ember-view"><input class="form-control" name="agency-advance" type="text">
+                            </div>
+
+                            <span class="input-group-addon">€ </span>
+                          </div>
+                          </div>
+                        </td>
+                        <td class="bg_alterne_soft_end">€0.00</td>
+                        <td class="bg_alterne_soft_end" width="40px">
+                          <label align="middle" class="checkbox-label">
+                            <input style="touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;" name="actualexp-0-reinvoiced" class="ember-checkbox ember-view" type="checkbox">
+                            <span class="bm-checkbox-style"></span>
+                          </label>
+                        </td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      </tbody>
+                    </table>
+
+
+                    <p style="clear:both">&nbsp;</p>
+
+                      <table width="100%"><tr><th class="bg_h4">Comments</th></tr></table>
+                    <br>
+                      <table width="41%" style="float:left">
+                        <tbody>
+                        <tr>
+                        <td align="center">
+                          <textarea class="normalarea" name="commentaires" id="commentaires"></textarea>
+                          <div class="legende"><span id="decompte_commentaires">500</span> caractères restants</div>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                    <input type="text" name="save" class="hiddeninput" value="save">
+
+
+                    <p style="clear:both">&nbsp;</p>
+                    <table width="100%"><tr><th class="bg_h4">Validations</th></tr></table>
+                    <br>
+                    <table>
+                      <tbody>
+                      <tr>
+                        <td><strong class="orange">Current validation workflow</strong></td>
+                        <td><span class="legende" style="margin-left:30px">Youssef SABRI &gt; Julien BOURLON</span></td>
+                      </tr>
+                      </tbody>
+                    </table>
+
+
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+</div>

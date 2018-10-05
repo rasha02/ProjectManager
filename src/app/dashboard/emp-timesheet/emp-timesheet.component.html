@@ -1,0 +1,73 @@
+<div id="main-content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-lg-6 col-md-8 col-sm-12">
+          <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="fa fa-arrow-left"></i></a> Time Sheet</h2>
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="/dashboard"><i class="icon-home"></i></a></li>
+            <li class="breadcrumb-item">TimeSheet</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="row clearfix">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="header">
+
+            <br>
+            <h6 class="text-danger"> {{periodes.length+1}} Time sheet(s) found</h6>
+          </div>
+          <div class="body">
+            <div class="table-responsive">
+              <table class="table table-bordered table-striped table-hover dataTable">
+                <thead class="thead-dark">
+                <tr>
+                  <th class="align-center">Period</th>
+                  <th class="align-center">Validation</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <th><a routerLink="/dashboard/timesheet" class="text-primary">Créer la feuille des temps de Septembre 2018</a></th>
+                  <td><img src="../../../assets/images/icone_en_cours.png" alt="" width="20" height="20" /></td>
+                </tr>
+                <tr *ngFor="let p of periodes">
+                  <th><a routerLink="/dashboard/timesheet/{{p._id}}/{{p.etat}}/{{p.dayNbr}}/{{p.name}}" class="text-primary">{{p.name}}</a></th>
+                  <td *ngIf="p.etat== 'enregistré et non validé'" > <img src="../../../assets/images/icone_w8_4_answer.png" alt="" width="20" height="20" /></td>
+                  <td *ngIf="p.etat== 'En attente de création'" > <img src="../../../assets/images/icone_en_cours.png" alt="" width="20" height="20" /></td>
+                  <td *ngIf="p.etat== 'Validation acceptée	' "> <img src="../../../assets/images/icone_valid.png" alt="" width="20" height="20" /></td>
+                  <td *ngIf="p.etat== 'Validation refusée'" > <img src="../../../assets/images/icone_nok.png" alt="" width="20" height="20" /></td>
+                  <td *ngIf="p.etat== 'En attente de validation	'" > <img src="../../../assets/images/icone_w8_ok.png" alt="" width="20" height="20" /></td>
+                </tr>
+
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
+      <table>
+        <tr><td width="30px">&nbsp;</td><small>Légende</small></tr>
+        <tr>
+          <td width="30px">&nbsp;</td>
+          <td><img src="../../../assets/images/icone_en_cours.png" alt="" width="20" height="20" />En attente de création</td>
+          <td width="30px">&nbsp;</td>
+          <td><img src="../../../assets/images/icone_w8_4_answer.png" alt="" width="20" height="20" />Enregistré & non validé</td>
+          <td width="30px">&nbsp;</td>
+          <td><img src="../../../assets/images/icone_w8_ok.png" alt="" width="20" height="20" />En attente de validation</td>
+          <td width="30px">&nbsp;</td>
+          <td><img src="../../../assets/images/icone_valid.png" alt="" width="20" height="20" />Validation acceptée</td>
+          <td width="30px">&nbsp;</td>
+          <td><img src="../../../assets/images/icone_nok.png" alt="" width="20" height="20" />Validation refusée</td>
+        </tr>
+      </table>
+      <br>
+    </div>
+  </div>
+</div>

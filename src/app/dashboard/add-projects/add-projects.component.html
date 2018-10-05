@@ -1,0 +1,151 @@
+<link rel="stylesheet" href="../../../assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
+<link rel="stylesheet" href="../../../assets/vendor/bootstrap-multiselect/bootstrap-multiselect.css">
+<link rel="stylesheet" href="../../../assets/vendor/summernote/dist/summernote.css"/>
+<link rel="stylesheet" href="../../../assets/vendor/dropify/css/dropify.min.css">
+<link rel="stylesheet" href="../../../assets/vendor/sweetalert/sweetalert.css">
+<link rel="stylesheet" href="../../../assets/vendor/jquery-datatable/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="../../../assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
+<script src="../../../assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script><!-- bootstrap datepicker Plugin Js -->
+<script src="../../../assets/vendor/bootstrap-multiselect/bootstrap-multiselect.js"></script>
+<script src="../../../assets/vendor/dropify/js/dropify.min.js"></script>
+<script src="../../../assets/vendor/summernote/dist/summernote.js"></script>
+<script src="../../../assets/js/pages/forms/dropify.js"></script>
+
+<div id="main-content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-lg-6 col-md-8 col-sm-12">
+          <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="fa fa-arrow-left"></i></a> Create New Project</h2>
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="/dashboard"><i class="icon-home"></i></a></li>
+            <li class="breadcrumb-item">Projects</li>
+            <li class="breadcrumb-item active">Add Project</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="row clearfix">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="body">
+            <div class="row clearfix">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Project Name *" [(ngModel)]="name" name="name" >
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-12">
+                <label>Select Client</label>
+                <div class="form-group">
+                  <select name="client" [(ngModel)]="theclient"  (change)="getIdClient(theclient)" class="form-control show-tick">
+                    <option *ngFor=" let clt of clients" [value]="clt._id"> {{clt.firstname}} {{clt.lastname}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-12">
+                <label>Start Date</label>
+                <div class="form-group">
+                  <input type="date"  class="form-control" placeholder="Start date *" [(ngModel)]="startdate" name="startdate">
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-12">
+                <label>Dead Line</label>
+                <div class="form-group">
+                  <input type="date"  class="form-control" placeholder="End date *" [(ngModel)]="enddate" name="endddate">
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-12">
+                <label>Select Priority</label>
+                <div class="form-group">
+                  <select class="form-control show-tick" [(ngModel)]="priority">
+                    <option>Select Priority</option>
+                    <option>High</option>
+                    <option>Medium</option>
+                    <option>Low</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row clearfix">
+              <div class="col-md-3 col-sm-12">
+                <label>Select Rate in Doller</label>
+                <div class="form-group">
+                  <input type="number" class="form-control" placeholder="Rate *" [(ngModel)]="rate">
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-12">
+                <label>Type</label>
+                <div class="form-group">
+                  <select class="form-control show-tick" [(ngModel)]="type">
+                    <option>Select Type</option>
+                    <option>Authority</option>
+                    <option>Forfait</option>
+                    <option>Recruitment</option>
+                    <option>Internal Project</option>
+                    <option>Rear Margin</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-12">
+                <label>Select Team Lead</label>
+                <div class="form-group">
+                  <select class="form-control show-tick">
+                    <option>Select</option>
+                    <option>Marshall Nichols</option>
+                    <option>Susie Willis</option>
+                    <option>Hossein Shams</option>
+                    <option>Fidel Tonn</option>
+                    <option>Frank Camly</option>
+                    <option>Debra Stewart</option>
+                    <option>Tim Hank</option>
+                  </select>
+                </div>
+              </div>
+
+
+              <textarea  id="myTextarea" cols="40" rows="7" [(ngModel)]="msg" ></textarea>
+           <!--   <div class="col-md-3 col-sm-12">
+                <label>Selet Team</label>
+                <div class="form-group">
+                  <select id="multiselect3-all" class="multiselect multiselect-custom" multiple="multiple" style="display: none;">
+                    <option value="multiselect-all">Select All</option>
+                    <option value="cheese">Cheese</option>
+                    <option value="tomatoes">Tomatoes</option>
+                    <option value="mozarella">Mozzarella</option>
+                    <option value="mushrooms">Mushrooms</option>
+                    <option value="pepperoni">Pepperoni</option>
+                    <option value="onions">Onions</option>
+                  </select><div class="btn-group"><button type="button" class="multiselect dropdown-toggle btn btn-default" data-toggle="dropdown" title="Cheese, Tomatoes, Mozzarella" aria-expanded="false"><span class="multiselect-selected-text">Cheese, Tomatoes, Mozzarella</span> <b class="caret"></b></button><ul class="multiselect-container dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 34px, 0px); top: 0px; left: 0px; will-change: transform;"><li class="multiselect-item multiselect-all"><a tabindex="0" class="multiselect-all"><label class="checkbox"><input type="checkbox" value="multiselect-all">  Select all</label></a></li><li class="active"><a tabindex="0"><label class="checkbox"><input type="checkbox" value="cheese"> Cheese</label></a></li><li class="active"><a tabindex="0"><label class="checkbox"><input type="checkbox" value="tomatoes"> Tomatoes</label></a></li><li class="active"><a tabindex="0"><label class="checkbox"><input type="checkbox" value="mozarella"> Mozzarella</label></a></li><li class="active"><a tabindex="0"><label class="checkbox"><input type="checkbox" value="mushrooms"> Mushrooms</label></a></li><li class="active"><a tabindex="0"><label class="checkbox"><input type="checkbox" value="pepperoni"> Pepperoni</label></a></li><li class="active"><a tabindex="0"><label class="checkbox"><input type="checkbox" value="onions"> Onions</label></a></li></ul></div>
+                </div>
+              </div>-->
+            </div>
+
+            <div class="row clearfix">
+              <div class="col-12">
+                <input type="file" class="dropify"(change)="fileChangeEvent($event)" placeholder="Upload file..." />
+                <div class="mt-3"></div>
+              </div>
+              <div class="col-sm-12">
+                <div class="summernote" >
+
+
+
+                </div>
+              </div>
+
+              <div class="col-sm-12">
+                <div class="mt-4">
+                  <button type="submit" class="btn btn-primary" (click)="addProject(name,theclient,startdate, enddate,priority,rate,type,this.msg)">Create</button>
+                  &nbsp;
+                  <button type="submit" class="btn btn-outline-secondary">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
