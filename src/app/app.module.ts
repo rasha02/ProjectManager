@@ -35,6 +35,7 @@ import { EmpExpensesComponent } from './dashboard/emp-expenses/emp-expenses.comp
 import { ExpensesComponent } from './dashboard/expenses/expenses.component';
 import { EmpAbsencesComponent } from './dashboard/emp-absences/emp-absences.component';
 import { AbsenceService} from './services/absence.service';
+import { ExpensesService} from './services/expenses.service';
 
 
 const routes:Routes=[
@@ -55,15 +56,13 @@ const routes:Routes=[
           {path: 'my-projects', component: MyProjectsComponent},
           {path: 'emp-attendance', component: AttendanceComponent},
           {path: 'emp-profile', component: EmpProfileComponent},
-          {path: 'emp-expenses', component: EmpExpensesComponent},
-          {path: 'expenses', component: ExpensesComponent},
           {path: 'emp-absences', component: EmpAbsencesComponent},
           {path: 'emp-timesheet', component: EmpTimeSheetComponent},
           {path: 'timesheet', component: TimesheetComponent},
           {path: 'timesheet/:iddoc/:etat/:dayNbr/:name', component: TimesheetComponent},
-
-
-
+          {path: 'emp-expenses', component: EmpExpensesComponent},
+          {path: 'expenses', component: ExpensesComponent},
+          {path: 'expenses/:idexpdoc/:etat/:dayNbr/:name', component: ExpensesComponent},
 
  ]
 },
@@ -118,7 +117,8 @@ const routes:Routes=[
     ProjectService,
     DocumentService,
     AbsenceService,
-    ClientService
+    ClientService,
+    ExpensesService
   ],
   bootstrap: [AppComponent]
 })

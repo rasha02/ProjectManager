@@ -3,7 +3,7 @@
     <div class="block-header">
       <div class="row">
         <div class="col-lg-6 col-md-8 col-sm-12">
-          <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="fa fa-arrow-left"></i></a> Time Sheet</h2>
+          <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="fa fa-arrow-left"></i></a> TimeSheets</h2>
           <ul class="breadcrumb">
             <li class="breadcrumb-item"><a routerLink="/dashboard"><i class="icon-home"></i></a></li>
             <li class="breadcrumb-item">TimeSheet</li>
@@ -18,7 +18,7 @@
           <div class="header">
 
             <br>
-            <h6 class="text-danger"> {{periodes.length+1}} Time sheet(s) found</h6>
+            <h6 class="text-danger"> {{nbr}} Time sheet(s) found</h6>
           </div>
           <div class="body">
             <div class="table-responsive">
@@ -31,19 +31,17 @@
                 </thead>
                 <tbody>
                 <tr>
-                  <th><a routerLink="/dashboard/timesheet" class="text-primary">Créer la feuille des temps de Septembre 2018</a></th>
+                  <th><a routerLink="/dashboard/timesheet" class="text-primary">Créer la feuille des temps de {{this.newmonth}}</a></th>
                   <td><img src="../../../assets/images/icone_en_cours.png" alt="" width="20" height="20" /></td>
                 </tr>
                 <tr *ngFor="let p of periodes">
                   <th><a routerLink="/dashboard/timesheet/{{p._id}}/{{p.etat}}/{{p.dayNbr}}/{{p.name}}" class="text-primary">{{p.name}}</a></th>
-                  <td *ngIf="p.etat== 'enregistré et non validé'" > <img src="../../../assets/images/icone_w8_4_answer.png" alt="" width="20" height="20" /></td>
                   <td *ngIf="p.etat== 'En attente de création'" > <img src="../../../assets/images/icone_en_cours.png" alt="" width="20" height="20" /></td>
-                  <td *ngIf="p.etat== 'Validation acceptée	' "> <img src="../../../assets/images/icone_valid.png" alt="" width="20" height="20" /></td>
+                  <td *ngIf="p.etat== 'enregistré et non validé'" > <img src="../../../assets/images/icone_w8_4_answer.png" alt="" width="20" height="20" /></td>
+                  <td *ngIf="p.etat== 'En attente de validation'" > <img src="../../../assets/images/icone_w8_ok.png" alt="" width="20" height="20" /></td>
+                  <td *ngIf="p.etat== 'Validation acceptée' "> <img src="../../../assets/images/icone_valid.png" alt="" width="20" height="20" /></td>
                   <td *ngIf="p.etat== 'Validation refusée'" > <img src="../../../assets/images/icone_nok.png" alt="" width="20" height="20" /></td>
-                  <td *ngIf="p.etat== 'En attente de validation	'" > <img src="../../../assets/images/icone_w8_ok.png" alt="" width="20" height="20" /></td>
-                </tr>
-
-
+                  </tr>
                 </tbody>
               </table>
             </div>

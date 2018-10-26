@@ -5,11 +5,11 @@ var Schema= mongoose.Schema;
 var AbsenceModelSchema = new Schema({
   absencetype:String,
   iduser:String,
-  start:String,
-  end:Number,
+  fromdate:String,
+  todate:String,
   description: String,
   etat: String,
-  reason:Boolean,
+  reason:String,
   validation:Boolean
 
 });

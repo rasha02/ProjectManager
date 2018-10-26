@@ -11,6 +11,7 @@ var DocModelSchema = new Schema({
   dayNbr:Number,
   etat: String,
   validation:Boolean,
+  datevalidation: String,
   validationExpert:Boolean,
   comment:String,
   files: [FilesModelSchema],

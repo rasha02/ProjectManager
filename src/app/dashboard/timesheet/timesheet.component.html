@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="../../../assets/css/bd/imanager.min.css">
+<link rel="stylesheet" href="../../../assets/vendor/dropify/css/dropify.min.css">
 
 <!-- MAIN CSS -->
 <link rel="stylesheet" href="../../../assets/css/main.css">
@@ -66,14 +67,14 @@
 
 </script>-->
 
-<div id="main-content">
+<div id="main-content" >
   <div class="container-fluid">
     <div class="block-header">
 
       <div class="row">
         <div class="col-lg-6 col-md-8 col-sm-12">
           <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i
-            class="fa fa-arrow-left"></i></a>Time Sheet</h2>
+            class="fa fa-arrow-left"></i></a>TimeSheets</h2>
           <ul class="breadcrumb">
             <li class="breadcrumb-item"><a routerLink="/dashboard"><i class="icon-home"></i></a></li>
             <li class="breadcrumb-item">TimeSheet</li>
@@ -102,14 +103,14 @@
                     <table width="100%">
                       <tbody><tr>
                         <td width="150px"></td>
-                        <td width="90px;"><a   *ngIf="this.iddoc != undefined"  class="bnavigation bnavlittletxt" href="" style="background-image:url(../../../assets/images/voir_pdfinterne.png);">Interne</a></td>
-                        <td width="90px;"><a    *ngIf="this.iddoc != undefined"   class="bnavigation bnavlittletxt" href="" style="background-image:url(../../../assets/images/voir_pdfexterne.png);">Client</a></td>
+                        <td width="90px;"><a   *ngIf="this.iddoc != undefined"  value="CPTURE" (click)="captureScreen()" class="bnavigation bnavlittletxt" style="background-image:url(../../../assets/images/voir_pdfinterne.png);">Interne</a></td>
+                        <td width="90px;"><a    *ngIf="this.iddoc != undefined"   class="bnavigation bnavlittletxt" value="CPTURE" (click)="captureScreen2()" style="background-image:url(../../../assets/images/voir_pdfexterne.png);">Client</a></td>
                         <td>&nbsp;</td>
                         <td width="90px"></td>
-                        <td width="90px"><a  *ngIf="this.iddoc != undefined" class="bnavigation bnavlittletxt" href="" style="background-image:url(../../../assets/images/icone_valid.png);">Validate</a></td>
+                        <td width="90px"><a *ngIf="(this.iddoc != undefined && this.etat != 'En attente de validation' )  || this.etat == 'enregistré et non validé'" (click)="validateact()" class="bnavigation bnavlittletxt" style="background-image:url(../../../assets/images/icone_valid.png);">Validate</a></td>
                         <td width="90px"></td>
                         <td width="35px">&nbsp;</td>
-                        <td width="95px"><input class="bactionico bsave" (click)="addactivity()" type="submit" value="Save"></td>
+                        <td width="95px"  ><input  *ngIf="(this.iddoc == undefined && this.etat != 'En attente de validation') || this.etat == 'enregistré et non validé' " class="bactionico bsave" (click)="addactivity()" type="submit" value="Save"></td>
                         <td width="75px"><a class="bnavigation breturn"  href="javascript:history.go(-1)">Return</a></td>
                       </tr>
                       </tbody>
@@ -120,7 +121,7 @@
                         <td width="100px"><strong>Ressource&nbsp;:</strong></td>
                         <td width="150px" align="left"><a class="lien" href="">{{this.user.name}}</a></td>
                         <td width="100px"><strong>Période&nbsp;:</strong></td>
-                        <td width="150px" align="left"> Octobre 2018</td>
+                        <td width="150px" align="left"> {{this.name}}</td>
                         <td width="100px"><strong>Agence :</strong></td>
                         <td width="150px" align="left">AGENCE</td>
                         <td width="170px"><strong>Unité d'oeuvre moyenne :</strong></td>
@@ -130,33 +131,34 @@
                       </tbody>
                     </table>
                     <br>
-                    <table width="100%">
+                    <table   width="100%">
                       <tbody id="tpsnormaux_body">
-                      <tr><th class="bg_h4" colspan="33">Activité Normale</th></tr>
+                      <tr><th class="bg_h4" colspan="33">Normal Activity</th></tr>
                       <tr>
                         <th class="text-primary" style="min-width:180px;" scope="col">Projet/Type d'activité</th>
-                        <th width="30px" *ngFor="let d of tabday" class="text-primary">{{d}}</th>
+                        <th width="30px" *ngFor="let d of tabday" class="text-primary">{{d.day}}</th>
 
                         <th width="25px" scope="col">&nbsp;</th>
                       </tr>
-                      <tr *ngFor="let t of tabact ; let i= index;"  class="bg_alterne_soft_full" id="tpsnormaux_ligne_1">
-                        <td>
-                          <input type="text" class="hiddeninput" name="ligne_idtemps[]" value="0">
-                          <select class="normalsmallselection"   [(ngModel)]="valeur" style="max-width:none;min-width:100%;width:100%" name="valeur" id="ligne_prj_1" (change)="gettype(valeur,i)">
+
+                      <tr [ngClass]="{'disable': isDisable}" *ngFor="let c of tabact ; let i= index;"  class="bg_alterne_soft_full" id="tpsnormaux_ligne_1">
+                        <td [ngClass]="{'disable': isDisable}">
+                          <input [ngClass]="{'disable': isDisable}"type="text" class="hiddeninput" name="ligne_idtemps[]" value="0">
+                          <select [ngClass]="{'disable': isDisable}" class="normalsmallselection"   [(ngModel)]="tabact[i].idproject" style="max-width:none;min-width:100%;width:100%" name="valeur" id="ligne_prj_1" (change)="gettype(c.idproject,i)">
                             <option >Absence</option>
                             <option >Interne</option>
                             <option *ngFor="let p of projects" [value]="p._id">{{p.name}}</option>
                           </select><br>
-                          <select class="shortsmallselection"   [(ngModel)]="type" style="max-width:none;min-width:70%;width:70%" name="type" id="ligne_typeh_1" (change)="savetype(type , i)">
+                          <select [ngClass]="{'disable': isDisable}" class="shortsmallselection"   [(ngModel)]="tabact[i].type" style="max-width:none;min-width:70%;width:70%" name="type" id="ligne_typeh_1" (change)="savetype(c.type , i)">
                             <option></option>
-                            <option *ngFor="let t of types">{{t}}</option>
+                            <option *ngFor="let t of types">{{t.tp}}</option>
 
                           </select>&nbsp;
-                          <input id="ligne_allchk_1" type="checkbox" onclick="checkAllActivity(this.checked,1,'tpsnormaux_ligne_1')" title="Remplir/Vider tous les jours ouvrés">
+                          <input [ngClass]="{'disable': isDisable}" id="ligne_allchk_1" type="checkbox" title="Remplir/Vider tous les jours ouvrés">
                         </td>
 
-                        <td  *ngFor="let t of tabday ; let j =index " class="bg_alterne_ouvre" id="tpsnormaux_ligne_1_0">
-                          <input name="day" [(ngModel)]="t[j]" id="ligne_txt_1_0" type="text" class="veryveryshortinput" (change)="getdays(i,t , t[j])" value="" maxlength="5">
+                        <td  [ngClass]="{'disable': isDisable}" *ngFor="let t of c.days ; let j =index " class="bg_alterne_ouvre" id="tpsnormaux_ligne_1_0">
+                          <input [ngClass]="{'disable': isDisable}" name="value" [(ngModel)]="t.value" id="ligne_txt_1_0" type="text" class="veryveryshortinput" (change)="getdays(i,t.day ,t.value)" value="" maxlength="5">
                         </td>
                         <!--<td class="bg_alterne_ouvre" id="tpsnormaux_ligne_1_1">
                           <input name="ligne_txt_1[]" id="ligne_txt_1_1" type="text" class="veryveryshortinput" value="" maxlength="5">
@@ -252,7 +254,7 @@
                         </td>
                       </tr>
 
-                      <tr class="bg_alterne_soft_full">
+                      <tr [ngClass]="{'disable': isDisable}" class="bg_alterne_soft_full ">
                         <td colspan="32">&nbsp;</td>
                         <td width="25px"><a (click)="addligne()"><img src="../../../assets/images/add.png" alt="Add" title="Add"></a></td>
                       </tr>
@@ -261,11 +263,11 @@
                     </table>
                     <span class="legende">Nb de jours ouvrés : 23</span><br>
                     <br>
-                    <table *ngIf="this.iddoc != undefined" width="100%">
-                      <tbody><tr><th class="bg_h4" colspan="14">Totaux</th></tr>
+                    <table *ngIf="this.iddoc != undefined && this.etat != 'enregistré et non validé'" width="100%">
+                      <tbody><tr><th class="bg_h4" colspan="14">Totals</th></tr>
                       </tbody>
                     </table>
-                    <table *ngIf="this.iddoc != undefined" width="330px" style="float:left">
+                    <table *ngIf="this.iddoc != undefined && this.etat != 'enregistré et non validé' " width="330px" style="float:left">
                       <tbody>
                       <tr><th class="text-primary" style="min-width:300px;" scope="col" colspan="3">Production</th><th width="30px">&nbsp;</th></tr>
                       <tr>
@@ -282,7 +284,7 @@
                       </tr>
                       </tbody>
                     </table>
-                    <table *ngIf="this.iddoc != undefined" width="330px" style="float:left">
+                    <table *ngIf="this.iddoc != undefined && this.etat != 'enregistré et non validé'  " width="330px" style="float:left">
                       <tbody><tr><th class="text-primary" style="min-width:300px;" scope="col" colspan="3">Absence</th><th width="30px">&nbsp;</th></tr>
                       <tr>
                         <td class="bg_alterne_soft_start"><strong>TOTAL</strong></td>
@@ -292,7 +294,7 @@
                       </tr>
                       </tbody>
                     </table>
-                    <table *ngIf="this.iddoc != undefined" width="330px" style="float:left">
+                    <table *ngIf="this.iddoc != undefined && this.etat != 'enregistré et non validé' " width="330px" style="float:left">
                       <tbody><tr><th class="text-primary" style="min-width:300px;" scope="col" colspan="3">Interne</th><th width="30px">&nbsp;</th></tr>
                       <tr>
                         <td class="bg_alterne_soft_start"><strong>TOTAL</strong></td>
@@ -302,7 +304,7 @@
                       </tr>
                       </tbody>
                     </table>
-                    <table *ngIf="this.iddoc != undefined" width="200px" style="float:left">
+                    <table *ngIf="this.iddoc != undefined  && this.etat != 'enregistré et non validé'" width="200px" style="float:left">
                       <tbody><tr><th    class="text-primary" style="min-width:200px;" scope="col" colspan="2">TOTAL</th></tr>
                       <tr>
                         <td class="bg_alterne_hard">22 u.o</td>
@@ -311,12 +313,12 @@
                       </tbody>
                     </table>
                     <p style="clear:both">&nbsp;</p>
-                    <table width="41%" style="float:left">
+                    <table width="40%" style="float:left">
                       <tbody>
                       <tr><th class="bg_h4">Commentaires</th></tr>
                       <tr>
                         <td align="center">
-                          <textarea class="normalarea" name="commentaires" id="commentaires"></textarea>
+                          <textarea class="normalarea" name="comment" [(ngModel)]="comment" id="comment" ></textarea>
                           <div class="legende"><span id="decompte_commentaires">500</span> caractères restants</div>
                         </td>
                       </tr>
@@ -324,35 +326,67 @@
                     </table>
                     <input type="text" name="save" class="hiddeninput" value="save">
 
-
-                    <table  *ngIf="this.iddoc != undefined"  width="55%" style="float:right">
-                      <tbody id="file_body">
+                   <!-- <table  *ngIf="this.iddoc != undefined"  width="50%" style="float:right">
+                   <tbody id="file_body">
                       <tr><th class="bg_h4" colspan="2">Pièces Jointes</th></tr>
-                      <tr class="bg_alterne_soft_full" id="file_ligne_1"><td width="220px">CRA_YSA_Juillet.pdf</td><td><a class="bnavigationico" style="float:left" href="https://app.boondmanager.com/tableau-de-bord/fiche-temps?vtype=fichier&amp;id=339&amp;idfile=723&amp;onglet=0"><img src="../../../assets/images/fichier.png" alt="Télécharger document" title="Télécharger"></a><span class="progress_bar" id="progress_bar_1" style="float:left"><img src="../../../assets/images/loader.gif"></span></td></tr>
-                      <tr class="bg_alterne_soft_full" id="file_ligne_2"><td width="220px">fact_imaxit_008082018.pdf</td><td><a class="bnavigationico" style="float:left" href="https://app.boondmanager.com/tableau-de-bord/fiche-temps?vtype=fichier&amp;id=339&amp;idfile=724&amp;onglet=0"><img src="../../../assets/images/fichier.png" alt="Télécharger document" title="Télécharger"></a><span class="progress_bar" id="progress_bar_2" style="float:left"><img src="../../../assets/images/loader.gif"></span></td></tr>
-                      <tr class="bg_alterne_soft_full" id="file_ligne_3"><td width="100%" colspan="2">
-                        <div id="file_update" action="https://app.boondmanager.com/tableau-de-bord/fiche-temps?vtype=updatefile&amp;todo=join&amp;id=339&amp;index=3&amp;onglet=0" method="post" enctype="multipart/form-data" target="upload_target" onsubmit="Wish_StartUpload(3);">
-                          <input type="file" name="file" style="float:left;margin-right:3px;">
+                    <div class="card">
+                      <div class="header">
+                        <h2>Default <small>Taken from: https://github.com/JeremyFagis/dropify</small></h2>
+                      </div>
+                      <div class="body">
+                        <div class="dropify-wrapper touch-fallback">
+                          <div class="dropify-message">
+                            <span class="file-icon"></span> <p>Drag and drop a file here or click</p><p class="dropify-error">Ooops, something wrong appended.</p>
+                          </div>
+                          <div class="dropify-loader" style="display: none;"></div>
+                          <div class="dropify-errors-container"><ul></ul></div>
+                          <input type="file" class="dropify">
+                          <button type="button" class="dropify-clear">Remove</button>
+                          <div class="dropify-preview" style="display: none;">
+                            <span class="dropify-render"></span>
+                            <div class="dropify-infos">
+                              <div class="dropify-infos-inner">
+                                <p class="dropify-filename">
+                                  <span class="file-icon"></span>
+                                  <span class="dropify-filename-inner">SCAN0025.pdf</span>
+                                </p>
+                                <p class="dropify-infos-message">Drag and drop or click to replace</p>
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                      </td></tr>
+                      </div>
+                    </div>
+                   </table>-->
+                    <table  *ngIf="this.iddoc != undefined  || this.etat=='enregistré et non validé'"  width="50%" style="float:right">
+                      <tbody id="file_body">
+                      <tr><th class="bg_h4" colspan="2">Attachments</th></tr>
+                      <tr class="bg_alterne_soft_full" id="file_ligne_1" *ngFor="let f of files"><td width="220px">{{f}}</td><td><a class="bnavigationico" style="float:left" href="http://localhost:3000/document/getPdfFile?file={{f}}"><img src="../../../assets/images/fichier.png" alt="Télécharger document" title="Télécharger"></a><span class="progress_bar" id="progress_bar_1" style="float:left"><img src="../../../assets/images/loader.gif"></span></td></tr>
+                      <tr class="bg_alterne_soft_full" id="file_ligne_3">
+                        <td width="100%" colspan="2">
+                        <div id="file_update" method="post" enctype="multipart/form-data" target="upload_target">
+                          <input type="file" name="file" style="float:left;margin-right:3px;" (change)="fileChangeEvent($event)">
+                        </div>
+                      </td>
+                      </tr>
                       </tbody>
                     </table>
                     <p style="clear:both">&nbsp;</p>
 
-                    <table *ngIf="this.iddoc != undefined" width="100%"><tr><th class="bg_h4">Validations</th></tr></table>
+                    <table *ngIf="this.iddoc != undefined  && this.etat != 'enregistré et non validé'  " width="100%"><tr><th class="bg_h4">Validations</th></tr></table>
                     <br/>
-                    <table *ngIf="this.iddoc != undefined">
+                    <table *ngIf="this.iddoc != undefined  && this.etat != 'enregistré et non validé' " >
                       <tr>
                         <td width="180px" class="bg_alterne_soft_full">
                           <table width="180px">
                             <tr>
-                              <td align="left"><strong>Validation 1</strong><br/>Youssef SABRI<br/><span class="legende">Senior</span></td>
+                              <td align="left"><strong>Validation 1</strong><br/>{{this.user.name}}<br/><span class="legende">Senior</span></td>
                               <td></td>
                             </tr>
                             <tr><td colspan="2">&nbsp;</td></tr>
-                            <tr><td colspan="2" align="left"><strong>Date :</strong>&nbsp;08/08/2018</td></tr>
+                            <tr><td colspan="2" align="left"><strong>Date :</strong>&nbsp;{{this.datevalidation | date:'shortDate' }}</td></tr>
                             <tr><td colspan="2">&nbsp;</td></tr>
-                            <tr><td colspan="2" align="left"><strong>Signature :</strong><img style="margin-left:30px" src="../../../assets/images/icone_valid.png" alt="Validation OK" /></td></tr>
+                            <tr><td colspan="2" align="left"><strong>Signature :</strong><img  *ngIf="this.validation" style="margin-left:30px" src="../../../assets/images/icone_valid.png" alt="Validation OK" /></td></tr>
                           </table>
                         </td>
                         <td width="50px">&nbsp;</td>
@@ -363,9 +397,12 @@
                               <td></td>
                             </tr>
                             <tr><td colspan="2">&nbsp;</td></tr>
-                            <tr><td colspan="2" align="left"><strong>Date :</strong>&nbsp;08/08/2018</td></tr>
+                            <tr><td colspan="2" align="left"><strong>Date :</strong>&nbsp;</td></tr>
                             <tr><td colspan="2">&nbsp;</td></tr>
-                            <tr><td colspan="2" align="left"><strong>Signature :</strong><img style="margin-left:30px" src="../../../assets/images/icone_valid.png" alt="Validation OK" /></td></tr>
+
+                            <tr><td  colspan="2" align="left"><strong>Signature :</strong><img *ngIf="this.validationExpert" style="margin-left:30px" src="../../../assets/images/icone_valid.png" alt="Validation OK" /></td></tr>
+                            <!--<tr><td  colspan="2" align="left"><strong>Signature :</strong></td></tr>
+                            <tr><td  colspan="2" align="left"><strong>Signature :</strong><img style="margin-left:30px" src="../../../assets/images/icone_nok.png" alt="Validation NOT OK" /></td></tr>-->
                           </table>
                         </td>
                         <td width="50px">&nbsp;</td>
@@ -376,13 +413,11 @@
                     <table>
                       <tbody>
                       <tr>
-                        <td><strong class="text-primary">Circuit de validation en cours</strong></td>
+                        <td><strong class="text-primary">Current validation workflow</strong></td>
                         <td><span class="legende" style="margin-left:30px">{{this.user.name}} &gt; Julien BOURLON</span></td>
                       </tr>
                       </tbody>
                     </table>
-
-
                   </div>
                 </div>
 
@@ -399,6 +434,6 @@
     </div>
 
   </div>
-</div>
 
+</div>
 

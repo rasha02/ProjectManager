@@ -15,30 +15,26 @@ export class MyProjectsComponent implements OnInit {
   idclient;
   client :any;
   myprojects:any ;
-
+  nbr;
 
   constructor(public empServ: EmployeeService, public clientserv: ClientService, public route: ActivatedRoute) {
     localStorage.getItem('iduser')
-this.client=[]
+    this.client=[]
     this.empServ.getProjsByEmp(localStorage.getItem('iduser')).subscribe(res => {
       this.myprojects = res
-console.log(res)
-console.log(res[0].theclient)
-console.log(res['length'])
-
+      this.nbr= this.myprojects.length
+    console.log(res)
+    console.log(res[0].theclient)
+    console.log(res['length'])
 
       for (var i = 0; i < res['length']; i++) {
-
         console.log(res[i].theclient)
-
         this.clientserv.getClientbyId(res[i].theclient).subscribe(data => {
           this.client.push(data)
-
         })
       }
       console.log(this.client)
     })
-
   }
 
   ngOnInit() {

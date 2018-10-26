@@ -5,7 +5,7 @@
         <div class="col-lg-6 col-md-8 col-sm-12">
           <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="fa fa-arrow-left"></i></a> Absences</h2>
           <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a routerLink="/dashboard"><i class="icon-home"></i></a></li>
+          <!--  <li class="breadcrumb-item"><a routerLink="/dashboard"><i class="icon-home"></i></a></li>-->
             <li class="breadcrumb-item">Absences</li>
           </ul>
         </div>
@@ -16,7 +16,7 @@
       <div class="col-lg-12">
         <div class="card">
           <div class="header">
-            <h6 class="text-danger"> X Absence requests found </h6>
+            <h6 class="text-danger"> {{nbr}} Absence requests found </h6>
             <ul class="header-dropdown">
               <li><a class="btn btn-info" data-toggle="modal" data-target="#Leave_Request">Add Leave Request</a></li>
             </ul>
@@ -28,44 +28,24 @@
               <table class="table table-bordered table-striped table-hover dataTable">
                 <thead class="thead-dark">
                 <tr>
-                  <th class="align-center"><input id="ligne_allchk_1" type="checkbox" onclick="checkAllActivity(this.checked,1,'tpsnormaux_ligne_1')" title="Selet All"></th>
                   <th class="align-center">Absence type</th>
                   <th class="align-center">Date</th>
                   <th class="align-center">Reason</th>
                   <th class="align-center">Validation</th>
                 </tr>
                 </thead>
-                <tbody>
+
                 <tr *ngFor="let ab of absences">
-                  <th><input id="ligne_allchk_2" type="checkbox"></th>
+
                   <th>{{ab.absencetype}}</th>
-                  <th>	{{ab.fromdate}} TO {{ab.todate}}</th>
+                  <th>	{{ab.fromdate}}&nbsp;TO&nbsp;{{ab.todate}}</th>
                   <th>{{ab.reason}}</th>
-                  <td  *ngIf="ab.etat== 'En attente de reponse'" > ><img src="../../../assets/images/icone_en_cours.png" alt="" width="20" height="20" align="middle"/></td>
-                </tr>
-                <tr>
-                  <th><input id="ligne_allchk_3" type="checkbox"></th>
-                  <th>Maladie</th>
-                  <th>20 July, 2018 to 26 July, 2018</th>
-                  <th>reason</th>
-                  <td><img src="../../../assets/images/icone_valid.png" alt="" width="20" height="20" /></td>
 
-
+                    <td  *ngIf="ab.etat== 'Pending response'" ><img src="../../../assets/images/icone_en_cours.png" alt="" width="20" height="20" align="middle"/></td>
+                    <td  *ngIf="ab.etat== 'Request accepted'" ><img src="../../../assets/images/icone_valid.png" alt="" width="20" height="20" align="middle"/></td>
+                    <td  *ngIf="ab.etat== 'Request refused'" ><img src="../../../assets/images/icone_nok.png" alt="" width="20" height="20" align="middle"/></td>
 
                 </tr>
-                <tr *ngFor="let ab of absences">
-                  <th>{{ab.absencetype}}</th>
-                  <th>{{ab.fromdate}} TO {{ab.todate}}</th>
-                  <th>{{ab.reason}}</th>
-                  <th><img src="../../../assets/images/icone_nok.png" alt="" width="20" height="20" /></th>
-                  <td *ngIf="p.etat== 'enregistré et non validé'" > <img src="../../../assets/images/icone_w8_4_answer.png" alt="" width="20" height="20" /></td>
-                  <td *ngIf="p.etat== 'En attente de création'" > <img src="../../../assets/images/icone_en_cours.png" alt="" width="20" height="20" /></td>
-                  <td *ngIf="p.etat== 'En attente de validation	'" > <img src="../../../assets/images/icone_w8_ok.png" alt="" width="20" height="20" /></td>
-                  <td *ngIf="p.etat== 'Validation acceptée	' "> <img src="../../../assets/images/icone_valid.png" alt="" width="20" height="20" /></td>
-                  <td *ngIf="p.etat== 'Validation refusée'" > <img src="../../../assets/images/icone_nok.png" alt="" width="20" height="20" /></td>
-                </tr>
-
-
                 </tbody>
               </table>
             </div>
@@ -78,15 +58,11 @@
         <tr><td width="30px">&nbsp;</td><small>Légende</small></tr>
         <tr>
           <td width="30px">&nbsp;</td>
-          <td><img src="../../../assets/images/icone_en_cours.png" alt="" width="20" height="20" />En attente de création</td>
+          <td><img src="../../../assets/images/icone_en_cours.png" alt="" width="20" height="20" />Pending response</td>
           <td width="30px">&nbsp;</td>
-          <td><img src="../../../assets/images/icone_w8_4_answer.png" alt="" width="20" height="20" />Enregistré & non validé</td>
+          <td><img src="../../../assets/images/icone_valid.png" alt="" width="20" height="20" />Request accepted</td>
           <td width="30px">&nbsp;</td>
-          <td><img src="../../../assets/images/icone_w8_ok.png" alt="" width="20" height="20" />En attente de validation</td>
-          <td width="30px">&nbsp;</td>
-          <td><img src="../../../assets/images/icone_valid.png" alt="" width="20" height="20" />Validation acceptée</td>
-          <td width="30px">&nbsp;</td>
-          <td><img src="../../../assets/images/icone_nok.png" alt="" width="20" height="20" />Validation refusée</td>
+          <td><img src="../../../assets/images/icone_nok.png" alt="" width="20" height="20" />Request refused</td>
         </tr>
       </table>
       <br>
@@ -104,20 +80,23 @@
       <div class="modal-body">
         <div class="row clearfix">
           <div class="col-md-12">
-            <select class="form-control mb-3 show-tick"  [(ngModel)]="absencetype">
+            <label>Select Type Absence</label>
+            <div class="form-group">
+            <select class="form-control show-tick" [(ngModel)]="absencetype">
               <option>Casual Leave </option>
               <option>Medical Leave</option>
               <option>Maternity Leave</option>
             </select>
+            </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
-              <input type="date" data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="From *"  [(ngModel)]="fromdate">
+              <input type="date"  class="form-control" placeholder="From *"  [(ngModel)]="fromdate">
             </div>
           </div>
           <div class="col-6">
             <div class="form-group">
-              <input type="date" data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="To *" [(ngModel)]="todate">
+              <input type="date"  class="form-control" placeholder="To *" [(ngModel)]="todate">
             </div>
           </div>
           <div class="col-md-12">
@@ -133,7 +112,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" (click)="addLeaveRequest()">Add</button>
+        <button type="button" class="btn btn-primary"  data-dismiss="modal" (click)="addLeaveRequest()">Add</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
       </div>
     </div>

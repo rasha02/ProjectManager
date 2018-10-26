@@ -36,6 +36,13 @@ export class EmployeeComponent implements OnInit {
     })
   }
 
+  deleteEmployee(id){
+    this.empServ.removeEmployee(id).subscribe(res=>{
+      this.getAllEmployees();
+
+    })
+  }
+
   removeEmployee(id)
   {
     swal({
@@ -85,7 +92,15 @@ export class EmployeeComponent implements OnInit {
   }
 
   addEmployee(){
-    this.empServ.addEmployee(this.name, this.email, this.password, this.phone, this.empid, this.joindate, this.role).subscribe(res=>{
+    let tab :any
+    tab =[this.name, this.email, this.password, this.phone, this.empid, this.joindate, this.role]
+    for(var i=0 ; i<tab.length; i++){
+      if(tab[i]== undefined){
+        tab[i]= "";
+      }
+    }
+
+    this.empServ.addEmployee(tab[0], tab[1], tab[2], tab[3], tab[4], tab[5], tab[6]).subscribe(res=>{
       console.log("done")
       this.getAllEmployees()
       swal(

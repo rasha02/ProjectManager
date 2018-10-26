@@ -39,39 +39,43 @@
                 <tr *ngFor="let lq of leaveReqs; let i=index">
                   <th scope="row">{{i+1}}</th>
                   <td class="width45">
-                    <img src="http://localhost:3000/emp-all/getAvatar?img={{lq.avatar}}" class="rounded-circle avatar" alt="">
+                    <img src="http://localhost:3000/employee/getAvatar?img={{this.absEmp[i].avatar}}" class="rounded-circle avatar" alt="">
                   </td>
                   <td>
-                    <h6 class="mb-0">{{lq.name}}</h6>
+                    <h6 class="mb-0">{{this.absEmp[i].name}}</h6>
                   </td>
-                  <td><span>{{lq.empid}}</span></td>
-                  <td><span>{{lq.leavetype}}</span></td>
-                  <td>from {{lq.fromdate}} to {{lq.todate}}</td>
+                  <td><span>{{this.absEmp[i].empid}}</span></td>
+                  <td><span>{{lq.absencetype}}</span></td>
+                  <td>from {{lq.fromdate}} TO {{lq.todate}}</td>
                   <td>{{lq.reason}}</td>
-                  <td>
-                    <button type="button" class="btn btn-sm btn-success" title="Approved"><i class="fa fa-check"></i></button>
-                    &nbsp;
-                    <button type="button" class="btn btn-sm btn-outline-danger js-sweetalert" title="Declined" data-type="confirm"><i class="fa fa-ban"></i></button>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="width45">
-                    <img src="../assets/images/xs/avatar2.jpg" class="rounded-circle avatar" alt="">
-                  </td>
-                  <td>
-                    <h6 class="mb-0">Maryam Amiri</h6>
-                  </td>
-                  <td><span>LA-0215</span></td>
-                  <td><span>Casual Leave</span></td>
-                  <td>21 July, 2018 to 26 July, 2018</td>
-                  <td>Attend Birthday party</td>
-                  <td>
-                    <button type="button" class="btn btn-sm btn-success" title="Approved"><i class="fa fa-check"></i></button>
-                    <button type="button" class="btn btn-sm btn-outline-danger js-sweetalert" title="Declined" data-type="confirm"><i class="fa fa-ban"></i></button>
-                  </td>
+
+                  <td *ngIf="lq.etat== 'Pending response'"><button type="button" class="badge badge-primary" title="Approved" data-toggle="modal" data-target="#myModal" data-dismiss="modal"><i class="fa fa-gavel" (click)="editLeaveReq(lq._id)"></i><span>Respond</span></button></td>
+                  <td *ngIf="lq.etat== 'Request accepted'"><button type="button" class="btn btn-sm btn-success" title="Approved"><i class="fa fa-check-circle"></i><span>Accepted</span></button></td>
+                  <td *ngIf="lq.etat== 'Request refused'"><button type="button" class="btn btn-danger" title="Declined"><i class="fa fa-ban"></i><span>Refused</span></button></td>
+
                 </tr>
                 </tbody>
               </table>
+            </div>
+          </div>
+
+
+          <div id="myModal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+            <div class="modal-dialog" >
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h6 class="modal-title mt-0">ACCEPT / REFUSE</h6>
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                  <button type="button" class="btn btn-success" data-dismiss="modal" (click)="acceptLeaveRequest()"><i class="fa fa-check-circle"></i> <span> ACCEPT</span></button>&nbsp;
+                  <button type="button" class="btn btn-warning" data-dismiss="modal" (click)="refuseLeaveRequest()"><i class="fa fa-warning"></i> <span> REFUSE</span></button>&nbsp;
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
+                </div>
+                <div class="modal-footer">
+
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -81,4 +85,5 @@
 </div>
 
 <!-- Default Size -->
+
 

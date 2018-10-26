@@ -1,5 +1,6 @@
 var express = require('express');
 var empModel = require('../models/employeeModel');
+var projectModel = require('../models/projectModel');
 var db = require('../models/db');
 var multer = require('multer');
 var path = require('path');
@@ -21,6 +22,8 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage });
 
+
+// ********************* Update Emp avatar *************************
 router.put("/uploadAvatar", upload.single("image"), function (req, res) {
 
     empModel.findByIdAndUpdate(req.query.id, {
@@ -64,6 +67,9 @@ router.put("/uploadAvatar", upload.single("image"), function (req, res) {
 
 });
 
+
+// *********************** Get Emp avatar *******************************
+
 router.get('/getAvatar', function (req,res) {
 
   console.log(__dirname+"/filesUploaded/"+req.query.img);
@@ -76,12 +82,29 @@ router.get('/getAvatar', function (req,res) {
 
 
 //******************** Get all employees **********************
+
 router.get('/', function (req, res) {
 
   empModel.find({}, function (err, result) {
     res.send(result)
   })
 
+})
+
+
+// ********************Get Emp by ID **************************
+
+router.get('/getEmpById', function (req,res){
+
+  console.log(req.query.iduser)
+  empModel.findById({_id: req.query.iduser}, function (err, emp){
+    if (err) {
+      res.send({err: 'there are error'})
+    }
+    else {
+      res.send(emp)
+    }
+  })
 })
 
 //************************* Add a new employee ****************************
@@ -168,6 +191,7 @@ router.put('/updateEmployee',function (req, res) {
   })
 })
 
+
 //************************** Delete an Employee ***********************
 
 router.get('/removeEmployee', function (req, res) {
@@ -205,6 +229,7 @@ router.get('/removeEmployee', function (req, res) {
             }
           })
         })
+
         if(i== emp.projs.length - 1){
           empModel.remove({_id: req.query.id}, function (err ) {
 

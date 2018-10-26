@@ -20,9 +20,9 @@ export class ClientService {
   }
 
 
-  getClientbyId(idclient){
+  getClientbyId(theclient){
 
-    console.log(idclient)
-    return this.http.get(this.base_url+"client/getClientbyProj?idclient="+idclient)
+    console.log(theclient)
+    return this.http.get(this.base_url+"client/getClientbyProj?idclient="+theclient)
   }
 }

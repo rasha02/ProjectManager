@@ -12,32 +12,44 @@ export class DocumentService {
 
 
 
-  getDocsByProject(idproj){
+ getDocsByProject(idproj){
     return this.http.get(this.base_url+"document/getDocsByProject?idproj="+idproj)
   }
 
-  getDocsByEmpByProj(iduser , idproj){
+ getDocsByEmpByProj(iduser , idproj){
     return this.http.get(this.base_url+"document/getDocsByUserByProj?iduser="+iduser+"&idproj="+idproj)
   }
 
-  saveDoc(iduser , iddoc ,comment , activity){
-console.log(activity)
+  createdoc(iduser){
+    return this.http.get(this.base_url+"document/createDoc?iduser="+iduser)
+  }
+
+ saveDoc(iduser , iddoc ,comment , activity){
+  console.log(activity)
    return this.http.post(this.base_url+"document/saveDoc?iduser="+iduser+"&iddoc="+iddoc+"&comment="+comment+"&activities="+JSON.stringify(activity) , {})
 
 }
+  save2Doc(iduser , iddoc ,comment , activity , name ,etat, formData){
 
-createdoc(iduser){
-   return this.http.get(this.base_url+"document/createDoc?iduser="+iduser)
-}
+    console.log(iduser , iddoc ,comment , activity , name ,etat, formData)
+    return this.http.post(this.base_url+"document/save2Doc?iduser="+iduser+"&iddoc="+iddoc+"&comment="+comment+"&activities="+JSON.stringify(activity)+"&name="+name+"&etat="+etat , formData)
 
-getperiode(iduser){
+  }
+
+  save2DocWithoutfiles(iduser , iddoc ,comment , activity , name){
+    console.log(activity)
+    return this.http.post(this.base_url+"document/save2DocWithoutfiles?iduser="+iduser+"&iddoc="+iddoc+"&comment="+comment+"&activities="+JSON.stringify(activity)+"&name="+name, {})
+  }
+
+ getperiode(iduser){
 
    return this.http.get(this.base_url+"document/getperiode?iduser="+iduser)
 }
 
-getdocbyperiode(iduser , iddoc , name){
+ getdocbyperiode(iduser , iddoc , name){
 
    return this.http.get(this.base_url+"document/getdocbyperiode?iduser="+iduser+"&iddoc="+iddoc+"&name="+name)
 }
+
 
 }

@@ -18,7 +18,7 @@
           <div class="header">
 
             <br>
-            <h6 class="text-danger"> {{periodes.length+1}} Expenses found</h6>
+            <h6 class="text-danger"> {{this.nbr}} Expenses found</h6>
           </div>
           <div class="body">
             <div class="table-responsive">
@@ -32,19 +32,19 @@
                 </thead>
                 <tbody>
                 <tr>
-                  <th><a routerLink="/dashboard/expenses" class="text-primary">Créer la feuille des frais de Septembre 2018</a></th>
+                  <th><a routerLink="/dashboard/expenses" class="text-primary">Créer la feuille des frais de {{this.newmonth}}</a></th>
                   <th><img src="../../../assets/images/icone_nok.png" alt="" width="20" height="20" /></th>
                   <td><img src="../../../assets/images/icone_en_cours.png" alt="" width="20" height="20" /></td>
                 </tr>
 
-                <tr *ngFor="let p of periodes">
-                  <th><a routerLink="/dashboard/expenses/{{p._id}}/{{p.etat}}/{{p.dayNbr}}/{{p.name}}" class="text-primary">{{p.name}}</a></th>
+                <tr *ngFor="let ex of expdocs">
+                  <th><a routerLink="/dashboard/expenses/{{ex._id}}/{{ex.expetat}}/{{ex.expdayNbr}}/{{ex.expname}}" class="text-primary">{{ex.expname}}</a></th>
                   <th><img src="../../../assets/images/icone_nok.png" alt="" width="20" height="20" /></th>
-                  <td *ngIf="p.etat== 'enregistré et non validé'" > <img src="../../../assets/images/icone_w8_4_answer.png" alt="" width="20" height="20" /></td>
-                  <td *ngIf="p.etat== 'En attente de création'" > <img src="../../../assets/images/icone_en_cours.png" alt="" width="20" height="20" /></td>
-                  <td *ngIf="p.etat== 'En attente de validation	'" > <img src="../../../assets/images/icone_w8_ok.png" alt="" width="20" height="20" /></td>
-                  <td *ngIf="p.etat== 'Validation acceptée	' "> <img src="../../../assets/images/icone_valid.png" alt="" width="20" height="20" /></td>
-                  <td *ngIf="p.etat== 'Validation refusée'" > <img src="../../../assets/images/icone_nok.png" alt="" width="20" height="20" /></td>
+                  <td *ngIf="ex.expetat== 'enregistré et non validé'" > <img src="../../../assets/images/icone_w8_4_answer.png" alt="" width="20" height="20" /></td>
+                  <td *ngIf="ex.expetat== 'En attente de création'" > <img src="../../../assets/images/icone_en_cours.png" alt="" width="20" height="20" /></td>
+                  <td *ngIf="ex.expetat== 'En attente de validation	'" > <img src="../../../assets/images/icone_w8_ok.png" alt="" width="20" height="20" /></td>
+                  <td *ngIf="ex.expetat== 'Validation acceptée	' "> <img src="../../../assets/images/icone_valid.png" alt="" width="20" height="20" /></td>
+                  <td *ngIf="ex.expetat== 'Validation refusée'" > <img src="../../../assets/images/icone_nok.png" alt="" width="20" height="20" /></td>
                 </tr>
 
 

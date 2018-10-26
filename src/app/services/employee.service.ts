@@ -15,6 +15,12 @@ export class EmployeeService {
     return this.http.get(this.base_url+"employee")
   }
 
+  getEmpById(iduser){
+
+    console.log(iduser)
+    return this.http.get(this.base_url+"employee/getEmpById?iduser="+iduser)
+  }
+
   removeEmployee(id){
 
     return this.http.get(this.base_url+"employee/removeEmployee?id="+id)
@@ -30,8 +36,8 @@ export class EmployeeService {
     return this.http.post(this.base_url+"employee/addEmployee?name="+name+"&email="+email+"&password="+password+"&phone="+phone+"&empid="+empid+"&joindate="+joindate+"&role="+role,{})
   }
 
-  getProjsByEmp(id){
-    return this.http.get(this.base_url+"project/getProjsByEmp?iduser="+id)
+  getProjsByEmp(iduser){
+    return this.http.get(this.base_url+"project/getProjsByEmp?iduser="+iduser)
   }
 
   getabsence(iduser){

@@ -23,9 +23,9 @@ var ActivityModelSchema = new Schema({
   name:String,
   etat: String,
   comment: String,
-  files:[FilesModelSchema]
 
 });
+
 var ProjectModelSchema = new Schema({
   name  : String,
   theclient: String,

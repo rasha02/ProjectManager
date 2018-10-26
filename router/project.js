@@ -32,6 +32,31 @@ router.get('/', function (req, res) {
 // ************************* Create a new project  ***************************************
 
 router.post('/addProject',upload.single("pdf"), function (req, res) {
+  var  project= new projectModel({
+    name: req.query.name,
+    theclient: req.query.theclient,
+    startdate: req.query.startdate,
+    enddate: req.query.enddate,
+    priority: req.query.priority,
+    rate: req.query.rate,
+    type: req.query.type,
+    msg: req.query.msg,
+    file: req.file.filename
+  });
+  project.save(function (err) {
+    console.log(err)
+    if(err) {
+      res.send({state:false})
+    }
+    else {
+      res.send({state:true})
+    }
+  })
+})
+
+// ************************* Create a new project without file adding  ***************************************
+
+router.post('/addProjectWithoutFile', function (req, res) {
   var  project= new projectModel({name: req.query.name,
     theclient:req.query.theclient,
     startdate:req.query.startdate,
@@ -39,7 +64,6 @@ router.post('/addProject',upload.single("pdf"), function (req, res) {
     priority:req.query.priority,
     rate:req.query.rate,
     type:req.query.type,
-    file:req.file.filename,
     msg: req.query.msg
 
   });
@@ -53,8 +77,6 @@ router.post('/addProject',upload.single("pdf"), function (req, res) {
     }
   })
 })
-
-
 //************************ Delete a project **********************************
 
 router.get('/removeProject', function (req, res) {
@@ -411,6 +433,33 @@ router.post('/uploadFilesToDoc', upload.array("uploads[]",12),function (req, res
     }
   })
 })
+
+
+
+// ********************** Get idproj by name ****************
+router.get('/getidproj' , function (req , res ){
+
+  projectModel.find({name : req.query.name} , function (err , result) {
+    if(err){
+      res.send({state:false})
+      throw err;
+    }
+    else{
+      res.send(result[0]._id)
+    }
+  })
+
+
+
+})
+
+
+
+
+
+
+
+
 
 
 

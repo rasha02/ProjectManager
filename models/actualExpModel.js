@@ -1,18 +1,17 @@
 var mongoose= require('mongoose');
 var Schema= mongoose.Schema;
 
-var ExpensesModelSchema = new Schema({
-  expday: String,
-  exptype: String,
-  expdescription:String,
-  expdevice:String,
-  expmontant: String,
-  expfixed: []
+var ActualExpModelSchema = new Schema({
+  actexpday: String,
+  actexptype: String,
+  actexpdescription:String,
+  actexpdevice:String,
+  actexpamount: String,
 
 });
 
-var ExpensesModel= mongoose.model('ExpensesModel', ExpensesModelSchema);
+var ActualExpModel= mongoose.model('ActualExpModel', ActualExpModelSchema);
 
 
 
-module.exports= ExpensesModel;
+module.exports= ActualExpModel;

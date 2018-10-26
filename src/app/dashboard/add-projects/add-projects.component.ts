@@ -13,7 +13,7 @@ import {ClientService} from '../../services/client.service';
 export class AddProjectsComponent implements OnInit {
   id;
   textareaValue = '';
-text;
+  text;
   name;
   startdate;
   enddate;
@@ -29,7 +29,7 @@ text;
   idclient;
   clients: any ;
   projects: any;
-listclients;
+  listclients;
   base_url="http://localhost:3000/"
 
   constructor(public projectServ: ProjectService, public clientServ: ClientService,  public route :ActivatedRoute, private http:HttpClient ) {
@@ -41,26 +41,46 @@ listclients;
   ngOnInit() {
   }
 
-
-  addProject(name,theclient, startdate, enddate, priority,rate,type,msg){
+  addProject() {
     //var x = document.getElementById("myTextarea")
     //console.log(x)
 
-    console.log(name, startdate, enddate,msg)
-    const formData: any = new FormData();
-    const files: Array<File> = this.filesToUpload;
+    if (this.filesToUpload != null){
 
-    formData.append("pdf", files[0], files[0]['name']);
+      const formData: any = new FormData();
+      const files: Array<File> = this.filesToUpload;
+      formData.append("pdf", files[0], files[0]['name']);
 
-    this.http.post(this.base_url+"projects/addProject?name="+name+"&theclient="+theclient+"&startdate="+startdate+"&enddate="+enddate+"&priority="+priority+"&type="+type+"&rate="+rate+"&msg="+msg,  formData ).subscribe( res => {
-      swal(
-        'Good job!',
-        'You added a project!',
-        'success'
-      )
-      }
-    )
+      this.projectServ.addProject(this.name,this.theclient,this.startdate,this.enddate,this.priority,this.type,this.rate,this.msg, formData).subscribe(data=>{
+        console.log("done")
+        swal(
+          'Good job!',
+          'A Project has been added!',
+          'success'
+        )
+      })
 
+    /*  this.http.post(this.base_url + "project/addProject?name=" + name + "&theclient=" + theclient + "&startdate=" + startdate + "&enddate=" + enddate + "&priority=" + priority + "&type=" + type + "&rate=" + rate + "&msg=" + msg, formData).subscribe(res => {
+        swal(
+          'Good job!',
+          'You added a project!',
+          'success'
+        )
+      })*/
+
+  }
+  else{
+    console.log()
+      this.projectServ.addProjectWithoutFile(this.name, this.theclient, this.startdate, this.enddate, this.priority, this.type, this.rate, this.msg).subscribe(res=>{
+        console.log("done")
+        swal(
+          'Good job!',
+          'A Project has been added!',
+          'success'
+        )
+
+      })
+  }
   }
 
   fileChangeEvent(fileInput: any) {

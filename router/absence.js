@@ -17,21 +17,18 @@ router.get('/', function (req, res) {
 
 
 //************************* Get all Leave Request****************************
-router.get('/getabsencebyEmp' , function(req , res ){
+router.get('/getabsencesByEmp' , function(req , res ){
 
-  absenceModel.findById( req.query.iduser , function( err , abs ){
-
+  absenceModel.find({iduser: req.query.iduser}, function( err , absence ){
+    console.log(req.query)
     if (err) {
       res.send({err: 'there are error'})
     }
     else {
 
-      res.send(abs)
-
+      res.send(absence)
     }
   })
-
-
 })
 
 
@@ -40,13 +37,14 @@ router.post('/createLeaveRequest', function (req, res) {
 console.log(req.query)
 
 var abs = new absenceModel({
+
   absencetype:req.query.absencetype,
   iduser:req.query.iduser,
   fromdate:req.query.fromdate,
   todate:req.query.todate,
   description: req.query.description,
   reason:req.query.reason,
-  etat: "En attente de reponse",
+  etat: "Pending response",
   validation:false
 });
 
@@ -73,7 +71,7 @@ router.put('/updateLeaveRequest',function (req, res) {
     todate:req.query.todate,
     description: req.query.description,
     reason: req.query.reason,
-    etat: "En attente de reponse",
+    etat: "Pending response",
     validation: false
 
   }, {new: true}, function (err, result) {
@@ -89,9 +87,11 @@ router.put('/updateLeaveRequest',function (req, res) {
 // ********************** Admin accept the leave Request *****************
 
 router.put('/acceptLeaveRequestByAdmin',function (req, res) {
+  console.log("idddddddddddddd:")
+  console.log(req.query.id)
 
-  absenceModel.findByIdAndUpdate(req.query.id, {
-    etat: "Leave request accepte",
+    absenceModel.findByIdAndUpdate(req.query.id, {
+    etat: "Request accepted",
 
   }, {new: true}, function (err, result) {
 
@@ -99,6 +99,7 @@ router.put('/acceptLeaveRequestByAdmin',function (req, res) {
       res.send({"state": "error"})
     }
     else {
+      res.send({"state": "ok"})
       console.log(result)
     }
   })
@@ -107,10 +108,11 @@ router.put('/acceptLeaveRequestByAdmin',function (req, res) {
 
 // ********************** Admin refuse the leave Request *****************
 
-router.put('/acceptLeaveRequestByAdmin',function (req, res) {
-
+router.put('/refuseLeaveRequestByAdmin',function (req, res) {
+console.log("AAAAAAAAAAAAA")
+  console.log(req.query.id)
   absenceModel.findByIdAndUpdate(req.query.id, {
-    etat: "Leave request refused"
+    etat: "Request refused",
 
   }, {new: true}, function (err, result) {
 
@@ -118,11 +120,16 @@ router.put('/acceptLeaveRequestByAdmin',function (req, res) {
       res.send({"state": "error"})
     }
     else {
+      res.send({"state": "ok"})
       console.log(result)
     }
   })
 
 })
+
+
+
+// ************************     *********************
 
 
 

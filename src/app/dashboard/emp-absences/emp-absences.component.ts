@@ -19,32 +19,33 @@ export class EmpAbsencesComponent implements OnInit {
   reason;
   etat;
   absences;
+  nbr;
 
   constructor(public absServ: AbsenceService, public router: Router) {
     this.iduser=localStorage.getItem('iduser')
-    this.getabsencesByEmp(localStorage.getItem('iduser'))
+    this.getabsencesByEmp()
+
   }
 
   ngOnInit() {
   }
 
-
-  getabsencesByEmp(iduser) {
-    console.log(iduser)
-    this.absServ.getabsencesByEmp(iduser).subscribe(data => {
+  getabsencesByEmp() {
+    console.log(localStorage.getItem('iduser'))
+    this.absServ.getabsencesByEmp(localStorage.getItem('iduser')).subscribe(data => {
       console.log(data)
       this.absences = data
+      this.nbr=this.absences.length
     })
-
   }
 
   addLeaveRequest() {
     this.absServ.addLeaveRequest(this.absencetype, this.iduser, this.fromdate, this.todate, this.description, this.reason).subscribe(res => {
       console.log("done")
-      this.getabsencesByEmp(localStorage.getItem('iduser'))
+      this.getabsencesByEmp()
       swal(
         'Good job!',
-        'An Employee has been added!',
+        'A leave request has been added!',
         'success'
       )
     })

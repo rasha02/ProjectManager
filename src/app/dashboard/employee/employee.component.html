@@ -64,7 +64,7 @@
                   <td>{{emp.role}}</td>
                   <td>
                     <button type="button" class="btn btn-sm btn-outline-secondary" title="Edit" data-toggle="modal" data-target="#myModalEdit" (click)="editEmployee(emp._id,emp.name,emp.email,emp.phone,emp.empid,emp.joindate, emp.role)"><i class="icon-pencil"></i></button>&nbsp;
-                    <button type="button" class="btn btn-sm btn-outline-danger js-sweetalert" title="Delete" data-type="confirm"><i class="icon-trash"></i></button>
+                    <button type="button" class="btn btn-sm btn-outline-danger" (click)="removeEmployee(emp._id)" title="Delete" data-type="confirm" ><i class="icon-trash"></i></button>
                   </td>
                 </tr>
               </tbody>

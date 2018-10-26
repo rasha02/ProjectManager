@@ -2,10 +2,11 @@ var mongoose= require('mongoose');
 var Schema= mongoose.Schema;
 
 
-var ExpModelSchema = new Schema({
+var ExpdocModelSchema = new Schema({
   expname: String,
   expmonth:String,
   expyear:String,
+  expscale:String,
   expdayNbr:Number,
   expetat: String,
   expvalidation:Boolean,
@@ -14,6 +15,6 @@ var ExpModelSchema = new Schema({
 
 });
 
-var ExpModel= mongoose.model('ExpModel', ExpModelSchema);
+var ExpdocModel= mongoose.model('ExpdocModel', ExpdocModelSchema);
 
-module.exports= ExpModel;
+module.exports= ExpdocModel;

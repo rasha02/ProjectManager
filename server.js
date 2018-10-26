@@ -7,6 +7,7 @@ var employee=require('./router/employee');
 var absence=require('./router/absence');
 var project=require('./router/project');
 var document=require('./router/document');
+var expenses=require('./router/expenses');
 var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
 var expressSession = require('express-session');
@@ -30,9 +31,7 @@ app.use('/absence',absence);
 app.use('/client', client);
 app.use('/project', project);
 app.use('/document', document);
-
-
-
+app.use('/expenses', expenses);
 
 
 

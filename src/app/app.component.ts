@@ -31,11 +31,7 @@ export class AppComponent {
 
   constructor(public userServ:UserService){
 
-      this.userServ.getallUsers().subscribe (res=> {
 
-      this.users=res;
-
-  })
 
 }
 }
